@@ -31,6 +31,23 @@ $colorpush: #7532fa;
   color: white;
 }
 
+.btn.btn-push-perfil {
+  background-color: $colorpush;
+  color: white;
+  border: 0px;
+}
+.btn.btn-push-perfil:hover {
+  background-color: $colorpush;
+  color: white;
+  border: 0px;
+}
+.btn.btn-push-perfil::after {
+  background-color: $colorpush;
+
+}
+
+
+
 .sidebar {
   width: 14rem;
   height: 100vh;
@@ -90,3 +107,5 @@ $colorpush: #7532fa;
   width: 400px;
  
 }
+
+
