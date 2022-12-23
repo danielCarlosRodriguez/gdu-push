@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 export const Login = () => {
   useEffect(() => {
+   
     return () => {
       document.body.style.backgroundImage =
         "linear-gradient(to right, #7531fa, #b23aff)";

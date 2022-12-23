@@ -6,14 +6,20 @@ import {
   DropdownToggle,
   UncontrolledDropdown,
 } from "reactstrap";
+import { LogoutButton } from "./LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
-import { Perfil } from "./Perfil";
 
- const nombre = Perfil.nombre
- const email = Perfil.email;
- const logout = Perfil.logout;
+
+
+
+
  
 export const Navbar = () => {
+
+  const { user } = useAuth0();
+
+
   return (
     <div className="navbar">
       <Container>
@@ -22,18 +28,22 @@ export const Navbar = () => {
           <DropdownToggle caret className="btn btn-push-perfil">
             <img
               className="rounded-circle"
-              src="https://github.com/mdo.png"
+              src={user.picture}
               alt="alt"
               style={{ width: "32px", height: "32px" }}
             />
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem >{nombre}</DropdownItem>
-            <DropdownItem>{email}</DropdownItem>
-            <DropdownItem >{logout}</DropdownItem>
+            <DropdownItem>{user.name}</DropdownItem>
+            <DropdownItem>{user.email}</DropdownItem>
+            <DropdownItem>
+              <LogoutButton />
+            </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Container>
+
+  
     </div>
   );
 };

@@ -15,24 +15,22 @@ import { Estadisticas } from "./Routes/Estadisticas/Estadisticas";
 
 
 export const Dashboard = () => {
-    return (
-     
-        <BrowserRouter>
-          <div className="flex">
-            <Sidebar />
-            <div className="content w-100">
-              <Navbar />
-              <Routes>
-               
-                <Route exact path="/geant" element={<Geant />} />
-                <Route exact path="/disco" element={<Disco />} />
-                <Route exact path="/devoto" element={<Devoto />} />
-                <Route exact path="/enviados" element={<Enviados />} />
-                <Route exact path="/estadisticas" element={<Estadisticas />} />
-              </Routes>
-            </div>
-          </div>
-        </BrowserRouter>
-  
-    );
+  return (
+    <BrowserRouter>
+      <div className="flex">
+        <Sidebar />
+        <div className="content w-100">
+          <Navbar />
+        
+          <Routes>
+            <Route exact path="/geant" element={<Geant />} />
+            <Route exact path="/disco" element={<Disco />} />
+            <Route exact path="/devoto" element={<Devoto />} />
+            <Route exact path="/enviados" element={<Enviados />} />
+            <Route exact path="/estadisticas" element={<Estadisticas />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  );
 };

@@ -1,17 +1,35 @@
 import React from "react-router-dom";
 import "./App.scss";
-import { Inicio } from "./components/Inicio";
+
 import { Dashboard } from "./components/Dashboard";
+import { LoginButton } from "./components/LoginButton";
+
+import { useAuth0 } from "@auth0/auth0-react";
+import { Login } from "./components/Login";
 
 
 function App() {
+  const { isAuthenticated, isLoading } = useAuth0();
+  if (isLoading) return <h1>Loading...</h1>;
 
- const status = true
+ console.log(isAuthenticated);
+
+
+
+
 
   return (
-    <>{!status ? <Inicio /> : <Dashboard />}</>
-
-    
+    <>
+      {!isAuthenticated ? (
+        <Login>
+          <LoginButton />
+        </Login>
+      ) : (
+        <Dashboard/>
+        
+         
+      )}
+    </>
   );
 }
 
