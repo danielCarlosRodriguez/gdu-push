@@ -40,7 +40,7 @@ export const Telefono = ({logo= logoGeant}) => {
                 ></textarea>
               </div>
 
-              <div className="btn btn-push">Pusheame</div>
+              <div className="btn btn-push" >Pusheame</div>
             </form>
           </Col>
           <Col className="col-12 col-md-6 contenedor-telefono">

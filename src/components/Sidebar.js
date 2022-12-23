@@ -37,6 +37,9 @@ export const Sidebar = () => {
         <li>
           <NavLink className="text-light rounded py-2 w-100 d-inline-block px-3" to="/estadisticas" activeclassname="active"><ImStatsDots className="me-2"/> Estadísticas</NavLink>
         </li>
+        <li>
+          <NavLink className="text-light rounded py-2 w-100 d-inline-block px-3" to="/mensaje" activeclassname="active"><ImStatsDots className="me-2"/> MensajePus</NavLink>
+        </li>
       </ul>
     </div>
   );

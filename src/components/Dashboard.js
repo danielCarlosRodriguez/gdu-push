@@ -8,6 +8,7 @@ import { Disco } from "./Routes/Disco/Disco";
 import { Devoto } from "./Routes/Devoto/Devoto";
 import { Enviados } from "./Routes/Enviados/Enviados";
 import { Estadisticas } from "./Routes/Estadisticas/Estadisticas";
+import { MensajePush } from './Routes/MensajePush/MensajePush';
 
 
 
@@ -28,6 +29,7 @@ export const Dashboard = () => {
             <Route exact path="/devoto" element={<Devoto />} />
             <Route exact path="/enviados" element={<Enviados />} />
             <Route exact path="/estadisticas" element={<Estadisticas />} />
+            <Route exact path="/mensaje" element={<MensajePush/>} />
           </Routes>
         </div>
       </div>
