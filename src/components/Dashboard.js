@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 
+import { Home } from "./Routes/Home/Home";
 import { Geant } from "./Routes/Geant/Geant";
 import { Disco } from "./Routes/Disco/Disco";
 import { Devoto } from "./Routes/Devoto/Devoto";
@@ -20,13 +21,13 @@ export const Dashboard = () => {
 
   return (
     <BrowserRouter>
-      
       <div className="flex">
         <Sidebar />
         <div className="content w-100">
           <Navbar />
 
           <Routes>
+            <Route exact path="/" element={<Home />} />
             <Route exact path="/geant" element={<Geant />} />
             <Route exact path="/disco" element={<Disco />} />
             <Route exact path="/devoto" element={<Devoto />} />
