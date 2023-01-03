@@ -84,7 +84,11 @@ export const Geant = () => {
 
 const requestOptions = {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
+
+  headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
   body: bodyDeDatos,
   //body: JSON.stringify({ title: "React POST Request Example" }),
 };
