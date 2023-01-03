@@ -19,7 +19,7 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <Container>
-        <strong className=" text-white text-center mx-auto ">GDU-Push</strong>
+        <strong className="text-center mx-auto ">GDU-Push</strong>
         <UncontrolledDropdown>
           <DropdownToggle caret className="btn btn-push-perfil">
             imagen

@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
+//import { useNavigate } from "react-router-dom";
+
+
+
+
+
 
 export const Login = () => {
+
+  //const navi = useNavigate();
+
+  const [loginEstado, setLoginEstado] = useState(false);
+   
+
   const [user, setUser] = useState([]);
   const [pass, setPass] = useState([]);
   const [datos, setDatos] = useState({
@@ -27,26 +39,57 @@ export const Login = () => {
 
     setDatos(datos);
     console.log("datos clcik: ", datos);
+    
+    setLoginEstado(true);
+   
+      
+  
+    //fetch("https://api-test.disco.com.uy/auth/token", {
+    // fetch("https://api-test.disco.com.uy/auth/token", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-type": "application/json",
+    //   },
+    //   //body: JSON.stringify({ username: user, password: pass, }),
+    //   body: JSON.stringify(datos),
+    // }) /*end fetch */
+    //   .then((response) => {
+    //       response.json();
+    //       localStorage.setItem("token", response.data.result.token)
+    //   })
+    //   .then((obj) => {
+    //     console.log(obj.results);
+    //   })
+    //   .catch((err) => console.error("error del catch", err));
 
-    fetch("https://api-test.disco.com.uy/auth/token", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      //body: JSON.stringify({ username: user, password: pass, }),
-      body: JSON.stringify(datos),
-    }) /*end fetch */
-      .then((response) => response.json())
-      .then((obj) => {
-        console.log(obj.results);
-      })
-      .catch((err) => console.error(err));
+    
+// axios
+//   .post(baseURL, {
+//     title: "Hello World!",
+//     body: JSON.stringify(datos),
+//   })
+//   .then((response) => {
+//     console.log(response.data);
+//   });
+
 
   };
 
+
+
+    //  useEffect(() => {
+    //    console.log("loginEstado en useEffect: ", loginEstado);
+    //    loginEstado ? navi("/dashboard") : console.log("me quedo tranqui");
+    //  }, [loginEstado]);
+    
+
+  
+  
+
   return (
     <div>
+     
       <Container>
         <div>user: {user}</div>
         <div>pass: {pass}</div>

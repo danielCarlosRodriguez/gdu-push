@@ -18,8 +18,10 @@ $gray: #c4ccde;
 $colorpush: #7532fa;
 
 .navbar {
-  background-color: $colorpush;
+  background-color: white;
   padding: 1rem 2rem;
+  border-bottom: #522aaa 1px solid;
+  color: #522aaa;
 }
 
 .btn.btn-push {
@@ -120,4 +122,11 @@ $colorpush: #7532fa;
 .contenedor-login {
 width: 100px;
 
+}
+
+.btn-tira{
+  background-color: #dc3545;
+}
+.btn-tira:hover{
+  background-color: #de0613;
 }

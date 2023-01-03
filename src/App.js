@@ -1,32 +1,38 @@
 import React from "react-router-dom";
-//import { Dashboard } from "./components/Dashboard";
-import { Login } from "./components/Login";
+
+//import { Login } from "./components/Login";
+import { Dashboard } from "./components/Dashboard"
 
 
 
 function App() {
-
-
-
-
+ 
 
   return (
     <>
-      <Login/>
-      {/* <Dashboard /> */}
-      {/* <LoginContext.Provider value={{ estado, setEstado }}>
-        {!estado ? (
-          <div>
-             <Login />{" "}
-          </div>
-        ) : (
-          <div>
-            
-            <Dashboard />
-          </div>
-        )}
+      <Dashboard />
 
-      
+      {/*
+      <Login />
+
+      <BrowserRouter>
+        <Routes>
+         
+          <Route exact path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+
+      <LoginContext.Provider value={{ loginEstado, setLoginEstado }}>
+        {loginEstado ? (
+          <>
+            <Login />
+           
+          </>
+        ) : (
+          <>
+            <Dashboard />
+          </>
+        )}
       </LoginContext.Provider> */}
     </>
   );

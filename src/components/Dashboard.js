@@ -15,7 +15,7 @@ import { MensajePush } from "./Routes/MensajePush/MensajePush";
 
 export const Dashboard = () => {
 
- 
+
   
 
   return (
@@ -39,3 +39,4 @@ export const Dashboard = () => {
     </BrowserRouter>
   );
 };
+
