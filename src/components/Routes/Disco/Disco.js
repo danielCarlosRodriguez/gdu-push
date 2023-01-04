@@ -93,10 +93,12 @@ export const Disco = () => {
       //body: JSON.stringify({ title: "React POST Request Example" }),
     };
     //fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
-    fetch("https://gduapiprod-env.eba-jua8ppsp.us-east-1.elasticbeanstalk.com/notifications/send", requestOptions)
+    fetch("http://api-test.disco.com.uy/notifications/send", requestOptions)
       .then((response) => response.json())
       .then((data) => this.setState({ postId: data.id }))
-      .catch((error) => { console.error('Error =>', error) });
+      .catch((error) => {
+        console.error("Error =>", error);
+      });
     
   }
   
