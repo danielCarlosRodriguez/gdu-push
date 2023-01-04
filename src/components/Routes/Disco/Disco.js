@@ -114,7 +114,7 @@ export const Disco = () => {
       },
       body: bodyDeDatos,
     };
-    fetch("http://api-test.disco.com.uy/notifications/send", requestOptions)
+    fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
       .then(async (response) => {
         const isJson = response.headers
           .get("content-type")
