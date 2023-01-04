@@ -94,7 +94,7 @@ export const Disco = () => {
     };
     //fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
     fetch(
-      "gduapiprod-env.eba-jua8ppsp.us-east-1.elasticbeanstalk.com/notifications/send",
+      "https://gduapiprod-env.eba-jua8ppsp.us-east-1.elasticbeanstalk.com/notifications/send",
       requestOptions
     )
       .then((response) => response.json())
