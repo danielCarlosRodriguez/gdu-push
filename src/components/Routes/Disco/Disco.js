@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Input } from "../../Input";
+import logoDisco from "../../../img/logos-disco-push.png";
 
 export const Disco = () => {
+  const [titulo, setTítulo] = useState("Acá va el Título 😎");
+  const [cuerpo, setCuerpo] = useState("¡Acá va el cuerpo del mensaje! 🚀");
+
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [fechaDeEnvio, setFechaDeEnvio] = useState("");
@@ -25,12 +29,15 @@ export const Disco = () => {
   function handleChange(name, value) {
     if (name === "title") {
       setTitle(value);
+      setTítulo(value);
     }
     if (name === "body") {
       setBody(value);
+      setCuerpo(value);
     }
     if (name === "fechaDeEnvio") {
       setFechaDeEnvio(value);
+      
     }
     if (name === "horaDeEnvio") {
       setHoraDeEnvio(value);
@@ -85,121 +92,143 @@ export const Disco = () => {
       body: bodyDeDatos,
       //body: JSON.stringify({ title: "React POST Request Example" }),
     };
-    fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
+    //fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
+    fetch(
+      "gduapiprod-env.eba-jua8ppsp.us-east-1.elasticbeanstalk.com/notifications/send",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((data) => this.setState({ postId: data.id }));
   }
 
   return (
-    <div className="col-4 ms-5 mt-5">
-      <Input
-        attribute={{
-          id: "title",
-          name: "title",
-          type: "text",
-          placeholder: "ingrese un título",
-        }}
-        handleChange={handleChange}
-      />
-      <Input
-        attribute={{
-          id: "body",
-          name: "body",
-          type: "text",
-          placeholder: "ingrese un mensaje",
-        }}
-        handleChange={handleChange}
-      />
+    <div className="row">
+      <div className="col-4 mx-5 mt-5">
+        <Input
+          attribute={{
+            id: "title",
+            name: "title",
+            type: "text",
+            placeholder: "ingrese un título",
+          }}
+          handleChange={handleChange}
+        />
+        <Input
+          attribute={{
+            id: "body",
+            name: "body",
+            type: "text",
+            placeholder: "ingrese un mensaje",
+          }}
+          handleChange={handleChange}
+        />
 
-      <div className="row g-2">
-        <div className="col-md">
-          <div className="form-floating">
-            <input
-              type="date"
-              className="form-control mb-3"
-              id="fechaDeEnvio"
-              name="fechaDeEnvio"
-              onChange={(e) => handleChange(e.target.name, e.target.value)}
-            />
+        <div className="row g-2">
+          <div className="col-md">
+            <div className="form-floating">
+              <input
+                type="date"
+                className="form-control mb-3"
+                id="fechaDeEnvio"
+                name="fechaDeEnvio"
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+              />
 
-            <label for="floatingInputGrid">Fecha de envío</label>
+              <label>Fecha de envío</label>
+            </div>
+          </div>
+          <div className="col-md">
+            <div className="form-floating">
+              <input
+                type="time"
+                className="form-control mb-3"
+                id="horaDeEnvio"
+                name="horaDeEnvio"
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+              />
+
+              <label>Hora de envío</label>
+            </div>
           </div>
         </div>
-        <div className="col-md">
-          <div className="form-floating">
-            <input
-              type="time"
-              className="form-control mb-3"
-              id="horaDeEnvio"
-              name="horaDeEnvio"
-              onChange={(e) => handleChange(e.target.name, e.target.value)}
-            />
 
-            <label for="floatingSelectGrid">Hora de envío</label>
+        <div className="row g-2">
+          <div className="col-md">
+            <div className="form-floating">
+              <input
+                type="date"
+                className="form-control mb-3"
+                id="fechaDeFin"
+                name="fechaDeFin"
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+              />
+
+              <label>Fecha de fin</label>
+            </div>
+          </div>
+          <div className="col-md">
+            <div className="form-floating">
+              <input
+                type="time"
+                className="form-control mb-3"
+                id="horaDeFin"
+                name="horaDeFin"
+                onChange={(e) => handleChange(e.target.name, e.target.value)}
+              />
+
+              <label>Hora de fin</label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="row g-2">
-        <div className="col-md">
-          <div className="form-floating">
-            <input
-              type="date"
-              className="form-control mb-3"
-              id="fechaDeFin"
-              name="fechaDeFin"
-              onChange={(e) => handleChange(e.target.name, e.target.value)}
-            />
-
-            <label for="floatingInputGrid">Fecha de fin</label>
-          </div>
-        </div>
-        <div className="col-md">
-          <div className="form-floating">
-            <input
-              type="time"
-              className="form-control mb-3"
-              id="horaDeFin"
-              name="horaDeFin"
-              onChange={(e) => handleChange(e.target.name, e.target.value)}
-            />
-
-            <label for="floatingSelectGrid">Hora de fin</label>
-          </div>
-        </div>
-      </div>
-
-      <select
-        className="form-select mb-3"
-        id="deepLinkType"
-        name="deepLinkType"
-        onChange={handleChangeSelectType}
-      >
-        <option value="" className="text-secondary">
-          Selecciona una opción
-        </option>
-        {dataSelectType.map((item, i) => (
-          <option key={i} value={item}>
-            {item}
+        <select
+          className="form-select mb-3"
+          id="deepLinkType"
+          name="deepLinkType"
+          onChange={handleChangeSelectType}
+        >
+          <option value="" className="text-secondary">
+            Selecciona una opción
           </option>
-        ))}
-      </select>
+          {dataSelectType.map((item, i) => (
+            <option key={i} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
 
-      <Input
-        attribute={{
-          id: "dataLinkId",
-          name: "dataLinkId",
-          type: "text",
-          placeholder: "id de producto, colección o categorías",
-        }}
-        handleChange={handleChange}
-      />
+        <Input
+          attribute={{
+            id: "dataLinkId",
+            name: "dataLinkId",
+            type: "text",
+            placeholder: "id de producto, colección o categorías",
+          }}
+          handleChange={handleChange}
+        />
 
-      <div className="btn btn-push " onClick={handleSubmit}>
-        Pusheame
+        <div className="btn btn-push " onClick={handleSubmit}>
+          Pusheame
+        </div>
+
+        <div id="muestro-mensaje"></div>
       </div>
 
-      <div id="muestro-mensaje"></div>
+      <div className="col-4  mt-5">
+        <div className="contenedor-push">
+          <div className="row px-2 my-auto">
+            <div className=" col-2 push-logo">
+              <img src={logoDisco} alt="logoDisco" />
+            </div>
+            <div className=" col-10  ps-2 text-start push-texto fs-5">
+              <div>
+                <strong>{titulo}</strong>
+              </div>
+              <div>{cuerpo}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
