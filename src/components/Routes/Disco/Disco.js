@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Input } from "../../Input";
 import logoDisco from "../../../img/logos-disco-push.png";
+
 
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
@@ -16,6 +18,7 @@ export const Disco = () => {
   const [type] = useState("ALL");
   const [dataLinkType, setDataLinkType] = useState("");
   const [dataLinkId, setDataLinkId] = useState("");
+
 
   const dataSelectType = [
     "product",
@@ -82,7 +85,7 @@ export const Disco = () => {
       txt.innerHTML = JSON.stringify(bodyDeDatos);
     }
 
-    
+    /*   
     const requestOptions = {
       method: "POST",
 
@@ -93,7 +96,7 @@ export const Disco = () => {
       body: bodyDeDatos,
       //body: JSON.stringify({ title: "React POST Request Example" }),
     };
-    //fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
+
     fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
       .then((response) => response.json())
       .then((data) => this.setState({ postId: data.id }))
@@ -101,59 +104,20 @@ export const Disco = () => {
         console.error("Error =>", error);
       });
    
-    
-    
-    
-    
-    // POST request using fetch with error handling
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-type": "application/json",
-    //   },
-    //   body: bodyDeDatos,
-    // };
-    // fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
-    //   .then(async (response) => {
-    //     const isJson = response.headers
-    //       .get("content-type")
-    //       ?.includes("application/json");
-    //     const data = isJson && (await response.json());
+    */
 
-    //     // check for error response
-    //     if (!response.ok) {
-    //       // get error message from body or default to response status
-    //       const error = (data && data.message) || response.status;
-    //       return Promise.reject(error);
-    //     }
-
-      
-    //   })
-    //   .catch((error) => {
-    
-    //     console.error("There was an error!", error);
-    //   });
-   
-    
-
-    // fetch("https://api-test.disco.com.uy/notifications/send", {
-    //   method: "post",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-type": "application/json",
-    //   },
-    //   body: bodyDeDatos,
-    // })
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //     console.log(responseJson);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-
-
+    axios
+      .post("https://api-test.disco.com.uy/notifications/send", {
+        bodyDeDatos,
+      }) // Using a post request, specifying the user
+      .then((response) => {
+        // Data retrieval and processing
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // If the query fails, an error will be displayed on the terminal.
+        console.error(error);
+      });
   }
   
 
