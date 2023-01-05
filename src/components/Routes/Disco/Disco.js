@@ -82,7 +82,7 @@ export const Disco = () => {
       txt.innerHTML = JSON.stringify(bodyDeDatos);
     }
 
-    /*
+    
     const requestOptions = {
       method: "POST",
 
@@ -100,7 +100,7 @@ export const Disco = () => {
       .catch((error) => {
         console.error("Error =>", error);
       });
-    */
+   
     
     
     
@@ -137,21 +137,21 @@ export const Disco = () => {
    
     
 
-    fetch("https://api-test.disco.com.uy/notifications/send", {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: bodyDeDatos,
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // fetch("https://api-test.disco.com.uy/notifications/send", {
+    //   method: "post",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-type": "application/json",
+    //   },
+    //   body: bodyDeDatos,
+    // })
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     console.log(responseJson);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
 
 
   }
