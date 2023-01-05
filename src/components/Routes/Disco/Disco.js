@@ -81,6 +81,7 @@ export const Disco = () => {
     };
     if (bodyDeDatos) {
       console.log("bodyDeDatos: ", bodyDeDatos);
+      console.log("testLog");
       let txt = document.getElementById("muestro-mensaje");
       txt.innerHTML = JSON.stringify(bodyDeDatos);
     }
