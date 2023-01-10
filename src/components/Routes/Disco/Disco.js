@@ -81,12 +81,10 @@ export const Disco = () => {
     };
     if (bodyDeDatos) {
       console.log("bodyDeDatos: ", bodyDeDatos);
-      console.log("testLog");
       let txt = document.getElementById("muestro-mensaje");
       txt.innerHTML = JSON.stringify(bodyDeDatos);
     }
 
-    /*   
     const requestOptions = {
       method: "POST",
 
@@ -105,8 +103,8 @@ export const Disco = () => {
         console.error("Error =>", error);
       });
    
-    */
 
+      /*
     axios
       .post("https://api-test.disco.com.uy/notifications/send", {
         bodyDeDatos,
@@ -119,6 +117,7 @@ export const Disco = () => {
         // If the query fails, an error will be displayed on the terminal.
         console.error(error);
       });
+      */
   }
   
 
