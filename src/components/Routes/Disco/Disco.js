@@ -85,6 +85,27 @@ export const Disco = () => {
       txt.innerHTML = JSON.stringify(bodyDeDatos);
     }
 
+    let user = "nelizabelar@disco.com.uy";
+    let pass = "NicoGrupoDisco";
+
+    fetch("https://api-test.disco.com.uy/auth/token", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ username: user, password: pass, }),
+  }) /*end fetch */
+    .then((response) => {
+        response.json();
+        localStorage.setItem("token", response.data.result.token)
+        console.log("token", response.data.result.token);
+    })
+    .then((obj) => {
+      console.log(obj.results);
+    })
+    .catch((err) => console.error("error del catch", err));
+
     const requestOptions = {
       method: "POST",
 
@@ -104,20 +125,6 @@ export const Disco = () => {
       });
    
 
-      /*
-    axios
-      .post("https://api-test.disco.com.uy/notifications/send", {
-        bodyDeDatos,
-      }) // Using a post request, specifying the user
-      .then((response) => {
-        // Data retrieval and processing
-        console.log(response.data);
-      })
-      .catch((error) => {
-        // If the query fails, an error will be displayed on the terminal.
-        console.error(error);
-      });
-      */
   }
   
 
