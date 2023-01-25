@@ -85,8 +85,8 @@ export const Disco = () => {
       txt.innerHTML = JSON.stringify(bodyDeDatos);
     }
 
-    let user = "nelizabelar@disco.com.uy";
-    let pass = "NicoGrupoDisco";
+    let user = "abc";
+    let pass = "abc";
 
     fetch("https://api-test.disco.com.uy/auth/token", {
     method: "POST",
