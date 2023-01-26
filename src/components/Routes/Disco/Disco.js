@@ -85,6 +85,7 @@ export const Disco = () => {
       txt.innerHTML = JSON.stringify(bodyDeDatos);
     }
 
+    /*
     let user = "abc";
     let pass = "abc";
 
@@ -95,7 +96,7 @@ export const Disco = () => {
       "Content-type": "application/json",
     },
     body: JSON.stringify({ username: user, password: pass, }),
-  }) /*end fetch */
+  }) 
     .then((response) => {
         response.json();
         localStorage.setItem("token", response.data.result.token)
@@ -105,13 +106,15 @@ export const Disco = () => {
       console.log(obj.results);
     })
     .catch((err) => console.error("error del catch", err));
+    */
 
     const requestOptions = {
       method: "POST",
 
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-type": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI3YzFlZmU3MS1kYWY2LTRhMDEtOGUzMS05NDQyY2Q1MGE3Y2UiLCJpYXQiOjE2NzQ3MzUwODEsInN1YiI6IjI0M2U3ZmZkLTFmNDYtNGExMy1hOWFiLWVlNmYyNjc5ODdlOSIsImlzcyI6Imh0dHBzOi8vZ2R1LWFwaS5oZXJva3VhcHAuY29tIn0.43-0A6MiBqTfvULxK9lM1cm6TluBNeuK2nm2P5c1cwala-WWUaC2xquN6o7rPt9ReZAaUj8BonAUUDe53a4Jbw"
       },
       body: bodyDeDatos,
       //body: JSON.stringify({ title: "React POST Request Example" }),
