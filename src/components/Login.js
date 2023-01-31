@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-//import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-  //const navi = useNavigate();
-
-  // const getTokenLocalStorage = () => {
-  //   let token = localStorage.getItem("");
-  //   console.log("token: ", token);
-  // };
-
-  // getTokenLocalStorage();
-
-  //const [loginEstado, setLoginEstado] = useState(false);
-
   const [alerta, setAlerta] = useState(false);
   const [token, setToken] = useState();
   const [user, setUser] = useState();
@@ -46,8 +34,6 @@ export const Login = () => {
     //console.log(event.target.value);
   };
 
-
-
   const handleClick = (e) => {
     e.preventDefault();
     datos.username = user;
@@ -55,9 +41,6 @@ export const Login = () => {
 
     setDatos(datos);
     console.log("JSON.stringify: ", JSON.stringify(datos));
-
-    //setLoginEstado(true);
-    //console.log("loginEstado: ", loginEstado);
 
     fetch("https://api-test.disco.com.uy/auth/token", {
       method: "POST",
@@ -72,29 +55,17 @@ export const Login = () => {
       .then((responseData) => {
         console.log(responseData);
 
-      if (responseData.code === "access_denied") {
-        console.log("access_denied")
-        setAlerta(true);
-      } else {
-      localStorage.setItem("token", responseData);
-      setToken(localStorage.getItem("token"));
-      }
-
-              
-        
-
-        
-
+        if (responseData.code === "access_denied") {
+          console.log("access_denied");
+          setAlerta(true);
+        } else {
+          localStorage.setItem("token", responseData);
+          setToken(localStorage.getItem("token"));
+          window.location.replace("");
+        }
       })
       .catch((err) => console.error("error del catch", err));
   };
-
-  //eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxY2YwM2JmNS1hYjVlLTQ4NjAtOTFmMS0wYjEyMjVkZTgwMzAiLCJpYXQiOjE2NzUxNzAxMjksInN1YiI6ImNhOGQ0MDEzLTg5MTktNDQ4OS05ZGZkLTA4NzYyOGVlNjhiYyIsImlzcyI6Imh0dHBzOi8vZ2R1LWFwaS5oZXJva3VhcHAuY29tIn0.5zw18u4vhTVTOQCjOhvGOJ9Idf6Nyay3uOkqAlpFWU8MTT9KSw8-rGLkL50pMK6UjHDr4KDc5sEps9omhCXrSQ
-
-  //  useEffect(() => {
-  //    console.log("loginEstado en useEffect: ", loginEstado);
-  //    loginEstado ? navi("/dashboard") : console.log("me quedo tranqui");
-  //  }, [loginEstado]);
 
   return (
     <div>
@@ -126,20 +97,17 @@ export const Login = () => {
               </form>
             </div>
 
-            {alerta ?
+            {alerta ? (
               <div
                 className="alert alert-danger w-25 mx-auto text-center"
                 role="alert"
               >
                 Usuario o Contraseña Incorrecta
               </div>
-              : null
-            }
+            ) : null}
           </>
         ) : (
-          <>
-            <h1>tengo token</h1>
-          </>
+          null
         )}
       </Container>
     </div>

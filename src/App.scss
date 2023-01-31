@@ -153,3 +153,9 @@ width: 100px;
   font-size: 3rem !important;
   color: white;
 }
+
+.accordion-button.collapsed {
+  padding-left: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}

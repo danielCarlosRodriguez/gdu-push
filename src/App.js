@@ -1,42 +1,19 @@
-import React from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import { Login } from "./components/Login";
-import { Dashboard } from "./components/Dashboard"
-
-
+import { Dashboard } from "./components/Dashboard";
 
 function App() {
- 
+  const [token, setToken] = useState();
 
-  return (
-    <>
-      {/* <Dashboard /> */}
-      <Login />
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
 
-      {/*
-      <Login />
 
-      <BrowserRouter>
-        <Routes>
-         
-          <Route exact path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
 
-      <LoginContext.Provider value={{ loginEstado, setLoginEstado }}>
-        {loginEstado ? (
-          <>
-            <Login />
-           
-          </>
-        ) : (
-          <>
-            <Dashboard />
-          </>
-        )}
-      </LoginContext.Provider> */}
-    </>
-  );
+  
+  return <>{token ? <Dashboard /> : <Login />}</>;
 }
 
 export default App;
