@@ -131,7 +131,7 @@ export const Login = () => {
                 className="alert alert-danger w-25 mx-auto text-center"
                 role="alert"
               >
-                Usuario o contraseña incorrecta
+                Usuario o Contraseña Incorrecta
               </div>
               : null
             }
