@@ -123,7 +123,7 @@ export const Disco = () => {
       body: JSON.stringify(bodyDeDatos),
     };
 
-    fetch("https://api-test. disco.com.uy/notifications/send", requestOptions)
+    fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
       .then((response) => response.json())
       .then((data) => this.setState({ postId: data.id }))
       .catch((error) => {
