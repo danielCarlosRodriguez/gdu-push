@@ -39,8 +39,7 @@ export const Disco = () => {
       setCuerpo(value);
     }
     if (name === "fechaDeEnvio") {
-      setFechaDeEnvio(value);
-      
+      setFechaDeEnvio(value); 
     }
     if (name === "horaDeEnvio") {
       setHoraDeEnvio(value);
@@ -63,8 +62,8 @@ export const Disco = () => {
   }
 
   function handleSubmit() {
-    let centerEndDate = fechaDeFin + "T" + horaDeFin + ":00";
-    let scheduleDate = fechaDeEnvio + "T" + horaDeEnvio + ":00";
+     let centerEndDate = fechaDeFin + "T" + horaDeFin + ":00";
+     let scheduleDate = fechaDeEnvio + "T" + horaDeEnvio + ":00";
 
     let data = {
       data: { deep_link_type: dataLinkType, deep_link_id: dataLinkId },
@@ -112,12 +111,13 @@ export const Disco = () => {
       method: "POST",
 
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI3YzFlZmU3MS1kYWY2LTRhMDEtOGUzMS05NDQyY2Q1MGE3Y2UiLCJpYXQiOjE2NzQ3MzUwODEsInN1YiI6IjI0M2U3ZmZkLTFmNDYtNGExMy1hOWFiLWVlNmYyNjc5ODdlOSIsImlzcyI6Imh0dHBzOi8vZ2R1LWFwaS5oZXJva3VhcHAuY29tIn0.43-0A6MiBqTfvULxK9lM1cm6TluBNeuK2nm2P5c1cwala-WWUaC2xquN6o7rPt9ReZAaUj8BonAUUDe53a4Jbw"
+        Authorization:
+          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI3YzFlZmU3MS1kYWY2LTRhMDEtOGUzMS05NDQyY2Q1MGE3Y2UiLCJpYXQiOjE2NzQ3MzUwODEsInN1YiI6IjI0M2U3ZmZkLTFmNDYtNGExMy1hOWFiLWVlNmYyNjc5ODdlOSIsImlzcyI6Imh0dHBzOi8vZ2R1LWFwaS5oZXJva3VhcHAuY29tIn0.43-0A6MiBqTfvULxK9lM1cm6TluBNeuK2nm2P5c1cwala-WWUaC2xquN6o7rPt9ReZAaUj8BonAUUDe53a4Jbw",
       },
-      body: bodyDeDatos,
-      //body: JSON.stringify({ title: "React POST Request Example" }),
+      //body: bodyDeDatos,
+      body: JSON.stringify(bodyDeDatos),
     };
 
     fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)

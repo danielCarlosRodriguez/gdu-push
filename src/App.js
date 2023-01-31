@@ -1,6 +1,6 @@
 import React from "react-router-dom";
 
-//import { Login } from "./components/Login";
+import { Login } from "./components/Login";
 import { Dashboard } from "./components/Dashboard"
 
 
@@ -10,7 +10,8 @@ function App() {
 
   return (
     <>
-      <Dashboard />
+      {/* <Dashboard /> */}
+      <Login />
 
       {/*
       <Login />
