@@ -110,12 +110,12 @@ $colorpush: #7532fa;
 }
 
 
-.fondo-login{
-  color: white;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-}
+// .fondo-login{
+//   color: white;
+//   display:flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 
 
 .contenedor-login {
@@ -158,4 +158,9 @@ width: 100px;
   padding-left: 12px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.fondo{
+  background-color: #7532fa;
+  
 }

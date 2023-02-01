@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
+
 
 export const Login = () => {
   const [alerta, setAlerta] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState([]);
   const [user, setUser] = useState();
   const [pass, setPass] = useState();
@@ -15,7 +16,7 @@ export const Login = () => {
     setToken(localStorage.getItem("tokenGduPush"));
   }, []);
 
-  console.log(token);
+  //console.log(token);
 
 
   // if (token) {
@@ -41,7 +42,7 @@ export const Login = () => {
     datos.password = pass;
 
     setDatos(datos);
-    console.log("JSON.stringify: ", JSON.stringify(datos));
+    //console.log("JSON.stringify: ", JSON.stringify(datos));
 
     fetch("https://api-test.disco.com.uy/auth/token", {
       method: "POST",
@@ -53,11 +54,11 @@ export const Login = () => {
     }) /*end fetch */
       .then((response) => response.json())
       .then((responseData) => {
-        console.log(responseData);
-        console.log(responseData.results);
+        //console.log(responseData);
+        //console.log(responseData.results);
 
         if (responseData.code === "access_denied") {
-          console.log("access_denied");
+          //console.log("access_denied");
           setAlerta(true);
         } else {
           localStorage.setItem("tokenGduPush", responseData);
@@ -66,42 +67,33 @@ export const Login = () => {
           window.location.replace("");
         }
       })
-      .then((obj) => {
-        console.log(obj.results);
-      })
       .catch((err) => console.error("error del catch", err));
   };
 
   return (
-    <div>
-      <Container>
-        <div>user: {user}</div>
-        <div>pass: {pass}</div>
-
-        {!token ? (
-          <>
-            <div className="bg-light shadow p-3 mb-5 bg-body rounded w-25 mx-auto d-flex">
-              <form className="">
-                <label className="form-label">Email address</label>
-                <input
-                  type="user"
-                  className="form-control"
-                  id="user"
-                  onChange={handleUser}
-                ></input>
-                <label className="form-label">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  onChange={handlePass}
-                ></input>
-                <button className="btn btn-primary mt-3" onClick={handleClick}>
-                  enviar
-                </button>
-              </form>
-            </div>
-
+    <>
+      <div className="fondo">
+        <div className="container vh-100 row justify-content-center align-items-center mx-auto">
+          <div className="row d-flex">
+            <form className="bg-light shadow p-3 bg-body rounded w-25 mx-auto ">
+              <label className="form-label">Email address</label>
+              <input
+                type="user"
+                className="form-control"
+                id="user"
+                onChange={handleUser}
+              ></input>
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                onChange={handlePass}
+              ></input>
+              <button className="btn btn-primary mt-3" onClick={handleClick}>
+                enviar
+              </button>
+            </form>
             {alerta ? (
               <div
                 className="alert alert-danger w-25 mx-auto text-center"
@@ -110,11 +102,9 @@ export const Login = () => {
                 Usuario o Contraseña Incorrecta
               </div>
             ) : null}
-          </>
-        ) : (
-          null
-        )}
-      </Container>
-    </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };

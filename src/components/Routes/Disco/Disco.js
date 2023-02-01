@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import axios from "axios";
 import { Input } from "../../Input";
 import logoDisco from "../../../img/logos-disco-push.png";
 
@@ -139,34 +138,34 @@ export const Disco = () => {
   return (
     <div className="row">
       <div className="col-4 mx-5 mt-5">
+        <label className="form-label text-muted">ingrese un título</label>
         <Input
           attribute={{
             id: "title",
             name: "title",
             type: "text",
-            placeholder: "ingrese un título",
+            placeholder: "",
           }}
           handleChange={handleChange}
         />
+        <label className="form-label text-muted">ingrese un mensaje</label>
         <Input
           attribute={{
             id: "body",
             name: "body",
             type: "text",
-            placeholder: "ingrese un mensaje",
+            placeholder: "",
           }}
           handleChange={handleChange}
         />
-
+        <label className="form-label text-muted">Selecciona una opción</label>
         <select
           className="form-select mb-3  text-muted"
           id="deepLinkType"
           name="deepLinkType"
           onChange={handleChangeSelectType}
         >
-          <option value="" className="text-secondary">
-            Selecciona una opción
-          </option>
+          <option value="" className="text-secondary"></option>
           {dataSelectType.map((item, i) => (
             <option key={i} value={item}>
               {item}
@@ -174,16 +173,18 @@ export const Disco = () => {
           ))}
         </select>
 
+        <label className="form-label text-muted">
+        id de producto, colección o categorías
+        </label>
         <Input
           attribute={{
             id: "dataLinkId",
             name: "dataLinkId",
             type: "text",
-            placeholder: "id de producto, colección o categorías",
+            placeholder: "",
           }}
           handleChange={handleChange}
         />
-
         <div className="accordion mb-3" id="accordionFlushExample">
           <div className="accordion-item">
             <h2 className="accordion-header" id="flush-headingOne">
@@ -274,11 +275,9 @@ export const Disco = () => {
             </div>
           </div>
         </div>
-
         <div className="btn btn-push " onClick={handleSubmit}>
-          Pusheame
+          Enviar
         </div>
-
         <div id="muestro-mensaje"></div>
       </div>
 
