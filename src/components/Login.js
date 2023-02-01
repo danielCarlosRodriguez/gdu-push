@@ -3,25 +3,26 @@ import { Container } from "react-bootstrap";
 
 export const Login = () => {
   const [alerta, setAlerta] = useState(false);
-  const [token, setToken] = useState();
+  const [token, setToken] = useState([]);
   const [user, setUser] = useState();
   const [pass, setPass] = useState();
   const [datos, setDatos] = useState({
-    username: "us",
-    password: "pas",
+    username: "",
+    password: "",
   });
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
+    setToken(localStorage.getItem("tokenGduPush"));
   }, []);
 
   console.log(token);
 
-  if (token) {
-    console.log("tengo token");
-  } else {
-    console.log("No tengo token");
-  }
+
+  // if (token) {
+  //   console.log("tengo token");
+  // } else {
+  //   console.log("No tengo token");
+  // }
 
   const handleUser = (event) => {
     setUser(event.target.value);
@@ -48,21 +49,25 @@ export const Login = () => {
         Accept: "application/json",
         "Content-type": "application/json",
       },
-      //body: JSON.stringify({ username: user, password: pass, }),
       body: JSON.stringify(datos),
     }) /*end fetch */
       .then((response) => response.json())
       .then((responseData) => {
         console.log(responseData);
+        console.log(responseData.results);
 
         if (responseData.code === "access_denied") {
           console.log("access_denied");
           setAlerta(true);
         } else {
-          localStorage.setItem("token", responseData);
+          localStorage.setItem("tokenGduPush", responseData);
+          localStorage.setItem("userGduPush", user);
           setToken(localStorage.getItem("token"));
           window.location.replace("");
         }
+      })
+      .then((obj) => {
+        console.log(obj.results);
       })
       .catch((err) => console.error("error del catch", err));
   };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import {
   DropdownItem,
@@ -6,13 +6,21 @@ import {
   DropdownToggle,
   UncontrolledDropdown,
 } from "reactstrap";
+import avatar from "../../src/img/avatar.png"
 
-
-
- 
 export const Navbar = () => {
+  const [user, setUser] = useState();
+  
+   useEffect(() => {
+     setUser(localStorage.getItem("userGduPush"));
+   }, []);
 
-
+  const handleClick = (e) => { 
+    console.log("hice click en logout")
+    localStorage.removeItem("userGduPush");
+    localStorage.removeItem("tokenGduPush");
+    window.location.replace("");
+  }
 
 
 
@@ -22,22 +30,18 @@ export const Navbar = () => {
         <strong className="text-center mx-auto ">GDU-Push</strong>
         <UncontrolledDropdown>
           <DropdownToggle caret className="btn btn-push-perfil">
-            imagen
-            {/* <img
+            <img
               className="rounded-circle"
-              src={user.picture}
+              src={avatar}
               alt="alt"
               style={{ width: "32px", height: "32px" }}
-            /> */}
+            />
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem>user.name</DropdownItem>
-            <DropdownItem>user.email</DropdownItem>
-           
-            <DropdownItem>
-            
-              
-            </DropdownItem>
+            <DropdownItem>{user}</DropdownItem>
+            <DropdownItem onClick={handleClick}>Logout</DropdownItem>
+
+            <DropdownItem></DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Container>

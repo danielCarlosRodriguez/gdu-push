@@ -7,7 +7,7 @@ function App() {
   const [token, setToken] = useState();
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
+    setToken(localStorage.getItem("tokenGduPush"));
   }, []);
 
 
