@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Input } from "../../Input";
 import logoDisco from "../../../img/logos-disco-push.png";
 
+import { CheckCircleFill } from "react-bootstrap-icons";
+import { ExclamationTriangleFill } from "react-bootstrap-icons";
+import { ExclamationOctagonFill } from "react-bootstrap-icons";
 
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
@@ -18,14 +21,16 @@ export const Disco = () => {
   const [dataLinkType, setDataLinkType] = useState("");
   const [dataLinkId, setDataLinkId] = useState("");
   const [token, setToken] = useState();
+  const [alertaSuccess, setAlertaSuccess] = useState(false);
+  const [alertaError, setAlertaError] = useState(false);
+  const [alertaWarning, setAlertaWarning] = useState(false);
+  const [message, setMessage] = useState(
+    "Ha ocurrido un error, intente nuevamente en unos minutos"
+  );
 
-    useEffect(() => {
-      setToken(localStorage.getItem("tokenGduPush"));
-    }, []);
-
-
-
-
+  useEffect(() => {
+    setToken(localStorage.getItem("tokenGduPush"));
+  }, []);
 
   const dataSelectType = [
     "product",
@@ -46,7 +51,7 @@ export const Disco = () => {
       setCuerpo(value);
     }
     if (name === "fechaDeEnvio") {
-      setFechaDeEnvio(value); 
+      setFechaDeEnvio(value);
     }
     if (name === "horaDeEnvio") {
       setHoraDeEnvio(value);
@@ -58,8 +63,6 @@ export const Disco = () => {
       setHoraDeFin(value);
     }
     if (name === "dataLinkId") {
-      //let cod = document.getElementById("data").value;
-
       setDataLinkId(value);
     }
   }
@@ -69,11 +72,9 @@ export const Disco = () => {
   }
 
   function handleSubmit() {
+    let centerEndDate = "";
+    let scheduleDate = "";
 
-     let centerEndDate ="";
-     let scheduleDate = ""
-
-  
     if (fechaDeEnvio === "") {
       console.log("fecha de envío vacía");
     } else {
@@ -88,7 +89,6 @@ export const Disco = () => {
 
     console.log(centerEndDate);
     console.log(fechaDeFin);
-     
 
     let data = {
       data: { deep_link_type: dataLinkType, deep_link_id: dataLinkId },
@@ -103,12 +103,12 @@ export const Disco = () => {
       type,
       data,
     };
-    if (bodyDeDatos) {
-      console.log("bodyDeDatos: ", bodyDeDatos);
-      let txt = document.getElementById("muestro-mensaje");
-      txt.innerHTML = JSON.stringify(bodyDeDatos);
-    }
 
+    // if (bodyDeDatos) {
+    //   console.log("bodyDeDatos: ", bodyDeDatos);
+    //   let txt = document.getElementById("muestro-mensaje");
+    //   txt.innerHTML = JSON.stringify(bodyDeDatos);
+    // }
 
     const requestOptions = {
       method: "POST",
@@ -124,20 +124,38 @@ export const Disco = () => {
 
     fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
       .then((response) => response.json())
-      .then((data) => this.setState({ postId: data.id }))
+      .then((data) => {
+        console.log(data);
+
+        if (data.message === "Title field is empty or invalid.") {
+          setMessage("Error, falta el título");
+        } else if (data.message === "Body field is empty or invalid.") {
+          setMessage("Error, falta el mensaje");
+        } else if (data.message === "Schedule date is invalid") {
+          setMessage("Error en fecha de envío");
+        } else if (data.message === "Center end date is invalid") {
+          setMessage("Error en fecha de finalización");
+        }
+
+        if (data.code === "SUCCESS") {
+          setAlertaSuccess(true);
+          setAlertaWarning(false);
+          setAlertaError(false);
+        } else {
+          setAlertaSuccess(false);
+          setAlertaWarning(true);
+          setAlertaError(false);
+        }
+      })
       .catch((error) => {
         console.error("Error =>", error);
+        setAlertaError(true);
       });
-   
-
   }
-  
-
-
 
   return (
-    <div className="row">
-      <div className="col-4 mx-5 mt-5">
+    <div className="row mb-5">
+      <div className="col-4 mx-5 my-5">
         <label className="form-label text-muted">ingrese un título</label>
         <Input
           attribute={{
@@ -172,9 +190,8 @@ export const Disco = () => {
             </option>
           ))}
         </select>
-
         <label className="form-label text-muted">
-        id de producto, colección o categorías
+          id de producto, colección o categorías
         </label>
         <Input
           attribute={{
@@ -278,7 +295,38 @@ export const Disco = () => {
         <div className="btn btn-push " onClick={handleSubmit}>
           Enviar
         </div>
-        <div id="muestro-mensaje"></div>
+
+        {alertaSuccess ? (
+          <div
+            className="alert alert-success mt-3 mx-auto text-center"
+            role="alert"
+          >
+            <CheckCircleFill /> {}
+            Envío Exitoso
+          </div>
+        ) : null}
+
+        {alertaError ? (
+          <div
+            id="alerta-de-error"
+            className="alert alert-danger mt-3 mx-auto text-center"
+            role="alert"
+          >
+            <ExclamationOctagonFill /> {}
+            Ha ocurrido un error, intente nuevamente en unos minutos
+          </div>
+        ) : null}
+
+        {alertaWarning ? (
+          <div
+            id="alerta-de-error"
+            className="alert alert-warning   mt-3 mx-auto text-center"
+            role="alert"
+          >
+            <ExclamationTriangleFill /> {}
+            {message}
+          </div>
+        ) : null}
       </div>
 
       <div className="col-4  mt-5">
