@@ -1,8 +1,8 @@
 import React from 'react'
 import fondo from "../../../img/fondo.jpg"
-import logoGeant from "../../../img/logos-geant-push.png"
-import logoDisco from "../../../img/logos-disco-push.png"
-import logoDevoto from "../../../img/logos-devoto-push.png"
+import logoGeant from "../../../img/logos-geant-push-v1.png"
+import logoDisco from "../../../img/logos-disco-push-v1.png"
+import logoDevoto from "../../../img/logos-devoto-push-v1.png"
 import { Link } from 'react-router-dom'
 
 export const Home = () => {
@@ -14,15 +14,15 @@ export const Home = () => {
         <div className="fs-3">
           Plataforma de notificaciones app personalizadas
         </div>
-        <div className="mt-5">
+        <div className="mt-5 bg-light py-5 rounded-4">
           <Link to="/geant">
-            <img src={logoGeant} alt="Logo Géant" className="mx-3" />
+            <img src={logoGeant} alt="Logo Géant" className="mx-5" />
           </Link>
           <Link to="/disco">
-            <img src={logoDisco} alt="Logo Disco" className="mx-3" />
+            <img src={logoDisco} alt="Logo Disco" className="mx-5" />
           </Link>
           <Link to="/devoto">
-            <img src={logoDevoto} alt="Logo Devoto" className="mx-3" />
+            <img src={logoDevoto} alt="Logo Devoto" className="mx-5" />
           </Link>
         </div>
       </div>

@@ -76,22 +76,20 @@ $colorpush: #7532fa;
 }
 
 .contenedor-push {
-  top: 150px;
-  left: 50%;
   background-color: white;
   width: 450px;
-  height: 130px;
-  border-radius: 10px;
+  height: 100px;
+  border-radius: 30px;
   border: 0.5px solid #ccc;
 }
 
 .push-logo {
   position: relative;
-  top: 30px;
+  top: 15px;
 }
 .push-texto {
   position: relative;
-  top: 30px;
+  top: 20px;
 }
 
 .fs-0 {
@@ -164,3 +162,9 @@ width: 100px;
   background-color: #7532fa;
   
 }
+
+.form-check-input:checked {
+  background-color: #7532fa !important;
+  border-color: #7532fa !important;
+}
+
