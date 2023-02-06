@@ -11,7 +11,7 @@ export const Input = ({ attribute, handleChange, param}) => {
           placeholder={attribute.placeholder}
           type={attribute.type}
           maxLength={attribute.maxLength}
-          className="form-control mb-3"
+          className={attribute.className}
           onChange={(e) => handleChange(e.target.name, e.target.value)}
         />
       </div>

@@ -168,3 +168,24 @@ width: 100px;
   border-color: #7532fa !important;
 }
 
+/*
+//centrado absoluto
+#cuadro{
+  background-color: aqua;
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  inset: 0;
+  margin: auto;
+}
+
+
+#cuadro{
+  background-color: aqua;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+*/
+

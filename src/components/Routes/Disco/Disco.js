@@ -20,6 +20,7 @@ export const Disco = () => {
   const [type] = useState("ALL");
   const [dataLinkType, setDataLinkType] = useState("");
   const [dataLinkId, setDataLinkId] = useState("");
+  const [dataLinkIdValido, setDataLinkIdValido] = useState(false);
   const [token, setToken] = useState();
   const [alertaSuccess, setAlertaSuccess] = useState(false);
   const [alertaError, setAlertaError] = useState(false);
@@ -29,6 +30,7 @@ export const Disco = () => {
   );
   const [checked, setChecked] = useState(false);
   const [inputId, setInputId] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
 
   useEffect(() => {
@@ -36,6 +38,7 @@ export const Disco = () => {
   }, []);
 
   const dataSelectTypeAmigable = [
+    "",
     "ir a la home",
     "link a un producto",
     "link a una colección",
@@ -56,6 +59,16 @@ export const Disco = () => {
   */
 
   function handleChange(name, value) {
+    setAlertaWarning(false)
+    setAlertaSuccess(false);
+    setAlertaError(false);
+   
+    
+
+    document.getElementById("title").classList.remove("is-invalid")
+    document.getElementById("body").classList.remove("is-invalid")
+    document.getElementById("deepLinkType").classList.remove("is-invalid")
+    
     if (name === "title") {
       setTitle(value);
       setTítulo(value);
@@ -78,16 +91,20 @@ export const Disco = () => {
     }
     if (name === "dataLinkId") {
       setDataLinkId(value);
+      
     }
   }
 
-
-
   function handleChangeSelectType(e) {
+    setAlertaWarning(false);
+    setAlertaSuccess(false);
 
-    if (e.target.value === "link a un producto") {
+    if (e.target.value === "") {
+      setDataLinkType("");
+      setInputId(false);
+    } else if (e.target.value === "link a un producto") {
       setDataLinkType("product");
-      setInputId(true)
+      setInputId(true);
     } else if (e.target.value === "link a una categoría") {
       setDataLinkType("category");
       setInputId(true);
@@ -106,97 +123,148 @@ export const Disco = () => {
     }
   }
 
+  useEffect(() => {
+    setMessage("")
 
+}, [dataLinkType]);
+
+
+  useEffect(() => {
+    //console.log("dataLinkType: ", dataLinkType);
+    //console.log("dataLinkId: ", dataLinkId);
+    setAlertaError(false);
+
+    if (
+      dataLinkType === "product" ||
+      dataLinkType === "collection" ||
+      dataLinkType === "category"
+    ) {
+      if (dataLinkId === "") {
+        document.getElementById("dataLinkId").classList.add("is-invalid");
+        setDataLinkIdValido(false);
+        //console.log("setDataLinkIdValido false", dataLinkIdValido);
+      } else {
+        document.getElementById("dataLinkId").classList.remove("is-invalid");
+        setDataLinkIdValido(true);
+        //console.log("setDataLinkIdValido true", dataLinkIdValido);
+      }
+    } else {
+      setDataLinkId("");
+      setDataLinkIdValido(true);
+      //console.log("setDataLinkIdValido true", dataLinkIdValido);
+    }
+  }, [dataLinkType, dataLinkIdValido, dataLinkId]);
+    
+
+
+ 
 
   function handleSubmit() {
     let centerEndDate = "";
     let scheduleDate = "";
-
+  
+  
     if (fechaDeEnvio === "") {
-      console.log("fecha de envío vacía");
+      //console.log("fecha de envío vacía");
     } else {
       scheduleDate = fechaDeEnvio + "T" + horaDeEnvio + ":00";
     }
 
     if (fechaDeFin === "") {
-      console.log("fecha de fin vacía");
+      //console.log("fecha de fin vacía");
     } else {
       centerEndDate = fechaDeFin + "T" + horaDeFin + ":00";
     }
-
-    console.log(centerEndDate);
-    console.log(fechaDeFin);
 
     let data = {
       data: { deep_link_type: dataLinkType, deep_link_id: dataLinkId },
     };
 
-    let bodyDeDatos = {
-      title,
-      body,
-      scheduleDate,
-      centerEndDate,
-      store,
-      type,
-      data,
-    };
+    if (title === "") {
+      document.getElementById("title").classList.add( "is-invalid");
+    } 
+      
+    if (body === "") {
+      document.getElementById("body").classList.add("is-invalid");
+    } 
+    
+    if (dataLinkType === "") {
+      document.getElementById("deepLinkType").classList.add("is-invalid");
+      //console.log("dataLinkType: ", dataLinkType);
+    } 
 
-    // if (bodyDeDatos) {
-    //   console.log("bodyDeDatos: ", bodyDeDatos);
-    //   let txt = document.getElementById("muestro-mensaje");
-    //   txt.innerHTML = JSON.stringify(bodyDeDatos);
-    // }
+   
 
-    const requestOptions = {
-      method: "POST",
 
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      //body: bodyDeDatos,
-      body: JSON.stringify(bodyDeDatos),
-    };
 
-    fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
 
-        if (data.message === "Title field is empty or invalid.") {
-          setMessage("Error, falta el título");
-        } else if (data.message === "Body field is empty or invalid.") {
-          setMessage("Error, falta el mensaje");
-        } else if (data.message === "Schedule date is invalid") {
-          setMessage("Error en fecha de envío");
-        } else if (data.message === "Center end date is invalid") {
-          setMessage("Error en fecha de finalización");
-        }
+    //console.log("title: ", title)
+    //console.log("body: ", body)
+    //console.log("dataLinkType: ", dataLinkType)
+    //console.log("dataLinkIdValido: ", dataLinkIdValido);
 
-        if (data.code === "SUCCESS") {
-          setAlertaSuccess(true);
-          setAlertaWarning(false);
-          setAlertaError(false);
-        } else {
-          setAlertaSuccess(false);
-          setAlertaWarning(true);
-          setAlertaError(false);
-        }
-      })
-      .catch((error) => {
-        console.error("Error =>", error);
-        setAlertaError(true);
-      });
+    if (title && body && dataLinkType && dataLinkIdValido) {
+      let bodyDeDatos = {
+        title,
+        body,
+        scheduleDate,
+        centerEndDate,
+        store,
+        type,
+        data,
+      };
+
+      setSpinner(true);
+      
+      // if (bodyDeDatos) {
+      //   console.log("bodyDeDatos: ", bodyDeDatos);
+      //   let txt = document.getElementById("muestro-mensaje");
+      //   txt.innerHTML = JSON.stringify(bodyDeDatos);
+      // }
+
+      const requestOptions = {
+        method: "POST",
+
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        //body: bodyDeDatos,
+        body: JSON.stringify(bodyDeDatos),
+      };
+
+      fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setMessage(data.message);
+          
+
+          if (data.code === "SUCCESS") {
+            setAlertaSuccess(true);
+            setAlertaWarning(false);
+            setAlertaError(false);
+            setSpinner(false);
+          } else {
+            setAlertaSuccess(false);
+            setAlertaWarning(true);
+            setAlertaError(false);
+            setSpinner(false);
+          }
+        })
+        .catch((error) => {
+          console.error("Error =>", error);
+          setAlertaError(true);
+          setSpinner(false);
+        });
+    }
   }
 
   function handleCheckFechaDeEnvio(event) {
     setChecked(!checked);
   }
 
-
-
- 
   return (
     <div className="row mb-5">
       <div className="col-4 mx-5 my-5">
@@ -208,9 +276,11 @@ export const Disco = () => {
             type: "text",
             placeholder: "",
             maxLength: "22",
+            className: `form-control mb-3`,
           }}
           handleChange={handleChange}
         />
+
         <label className="form-label text-muted">Ingrese un mensaje</label>
         <Input
           attribute={{
@@ -219,15 +289,17 @@ export const Disco = () => {
             type: "text",
             placeholder: "",
             maxLength: "31",
+            className: `form-control mb-3`,
           }}
           handleChange={handleChange}
         />
+
         <label className="form-label text-muted">
           Selecciona una opción de destino
         </label>
         <select
-          className="form-select mb-3  text-muted"
           id="deepLinkType"
+          className="form-select mb-3 text-muted"
           name="deepLinkType"
           onChange={handleChangeSelectType}
         >
@@ -248,17 +320,14 @@ export const Disco = () => {
                 id: "dataLinkId",
                 name: "dataLinkId",
                 type: "text",
+                className: `form-control mb-3`,
               }}
               handleChange={handleChange}
             />
           </>
         ) : null}
 
-
-
-
-        
-        <label className="form-label text-muted">Programar fecha de fin</label>
+        <label className="form-label text-muted">Fecha de fin del centro</label>
         <div className="row g-2">
           <div className="col-md">
             <div className="form-floating">
@@ -296,7 +365,7 @@ export const Disco = () => {
             id="check-fecha-de-envio"
             onChange={handleCheckFechaDeEnvio}
           />
-          <label className="form-check-label mb-2 " for="flexCheckDefault">
+          <label className="form-check-label mb-2 ">
             Programar fecha de envío
           </label>
         </div>
@@ -367,6 +436,16 @@ export const Disco = () => {
             {message}
           </div>
         ) : null}
+
+        
+        {spinner ? (
+         <div className="row">
+          <div className="spinner-border mx-auto" role="status">
+            </div>
+          </div>
+         ) : null}
+
+        
       </div>
 
       <div className="col-4  mt-5">
