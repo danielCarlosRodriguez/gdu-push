@@ -5,6 +5,8 @@ import logoDisco from "../../../img/logos-disco-push-v1.png";
 import { CheckCircleFill } from "react-bootstrap-icons";
 import { ExclamationTriangleFill } from "react-bootstrap-icons";
 import { ExclamationOctagonFill } from "react-bootstrap-icons";
+import { Modal, Button } from "react-bootstrap";
+
 
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
@@ -24,17 +26,19 @@ export const Disco = () => {
   const [alertaSuccess, setAlertaSuccess] = useState(false);
   const [alertaError, setAlertaError] = useState(false);
   const [alertaWarning, setAlertaWarning] = useState(false);
-  const [alertaFechaDeFin, setAlertaFechaDeFin] = useState(false);
   const [continuarEnvio, setContinuarEnvio] = useState(false);
   const [checked, setChecked] = useState(false);
   const [inputId, setInputId] = useState(false);
   const [spinner, setSpinner] = useState(false);
+  const [show, setShow] = useState(false);
   const [message, setMessage] = useState(
     "Ha ocurrido un error, intente nuevamente en unos minutos"
   );
 
-  let mensajeValidacion = "";
 
+   
+
+  
   //Pregunto si está logueado /////////////////////////////////////////////
   useEffect(() => {
     setToken(localStorage.getItem("tokenGduPush"));
@@ -56,7 +60,7 @@ export const Disco = () => {
     setAlertaWarning(false);
     setAlertaSuccess(false);
     setAlertaError(false);
-    setAlertaFechaDeFin(false);
+   
 
     document.getElementById("title").classList.remove("is-invalid");
     document.getElementById("body").classList.remove("is-invalid");
@@ -85,8 +89,7 @@ export const Disco = () => {
     if (name === "fechaDeFin") {
       setFechaDeFin(value);
       setContinuarEnvio(true);
-      setAlertaFechaDeFin(false);
-      console.log("handler cambio a true ContinuarEnvio: ", continuarEnvio);
+      //console.log("handler cambio a true ContinuarEnvio: ", continuarEnvio);
     }
     if (name === "horaDeFin") {
       setHoraDeFin(value);
@@ -161,15 +164,17 @@ export const Disco = () => {
 
   //Funciones de confirmación de fecha de fin ///////////////////////////////////
   function handleSi() {
-    console.log("apreto Si");
+    //console.log("apreto Si");
     setContinuarEnvio(true);
-    setAlertaFechaDeFin(false);
+    setShow(false);
   }
 
   function handleNo() {
-    console.log("apreto No");
-    setAlertaFechaDeFin(false);
-  }
+   //console.log("apreto No");
+   setShow(false);
+   }
+
+
 
   //Función para envíar datos ///////////////////////////////////
   function handleSubmit() {
@@ -195,36 +200,30 @@ export const Disco = () => {
     
     if (title === "") {
       document.getElementById("title").classList.add("is-invalid");
-      //mensajeValidacion = mensajeValidacion + "Falta Título, " 
-      //console.log("mensajeValidacion título; ", mensajeValidacion);
       document.getElementById("tooltip-titulo").classList.remove("collapse");
     }
 
     if (body === "") {
       document.getElementById("body").classList.add("is-invalid");
-     //mensajeValidacion = mensajeValidacion + "Falta Mensaje, " 
-     //console.log("mensajeValidacion body; ", mensajeValidacion);
       document.getElementById("tooltip-mensaje").classList.remove("collapse");
     }
 
     if (dataLinkType === "") {
       document.getElementById("deepLinkType").classList.add("is-invalid");
-      //mensajeValidacion = mensajeValidacion + "Falta Opción de Destino";
-      //console.log("dataLinkType: ", dataLinkType);
       document.getElementById("tooltip-opcion").classList.remove("collapse");
     }
 
     
     if (!continuarEnvio) {
-      console.log("continuarEnvio false: ", continuarEnvio);
-      setAlertaFechaDeFin(true);
+      //console.log("continuarEnvio false: ", continuarEnvio);
       document.getElementById("fechaDeFin").classList.add("is-invalid");
       document.getElementById("horaDeFin").classList.add("is-invalid");
+       
+       setShow(true);
+      
     }
 
-    console.log("mensajeValidacion xxx; ", mensajeValidacion);
-    setMessage(mensajeValidacion);
-
+ 
     if (title && body && dataLinkType && dataLinkIdValido && continuarEnvio) {
       let bodyDeDatos = {
         title,
@@ -236,16 +235,13 @@ export const Disco = () => {
         data,
       };
 
-      
-
-      console.log("continuarEnvio true: ", continuarEnvio);
       setSpinner(true);
 
       // Muestro mensaje en html //////////////////////////////
-      // if (bodyDeDatos) {
-      //   console.log("bodyDeDatos: ", bodyDeDatos);
-      //   let txt = document.getElementById("muestro-mensaje");
-      //   txt.innerHTML = JSON.stringify(bodyDeDatos);
+      //if (bodyDeDatos) {
+      //console.log("bodyDeDatos: ", bodyDeDatos);
+      //let txt = document.getElementById("muestro-mensaje");
+      //txt.innerHTML = JSON.stringify(bodyDeDatos);
       // }
 
       const requestOptions = {
@@ -306,10 +302,10 @@ export const Disco = () => {
 
         <div className="contenedor-tooptip">
           <div
-            class="speech-bubble speech-bubble-top collapse"
+            className="speech-bubble speech-bubble-top collapse"
             id="tooltip-titulo"
           >
-            <p>Falta título</p>
+            <p>Falta Título</p>
           </div>
         </div>
 
@@ -328,7 +324,7 @@ export const Disco = () => {
 
         <div className="contenedor-tooptip">
           <div
-            class="speech-bubble speech-bubble-top collapse"
+            className="speech-bubble speech-bubble-top collapse"
             id="tooltip-mensaje"
           >
             <p>Falta Mensaje</p>
@@ -353,7 +349,7 @@ export const Disco = () => {
 
         <div className="contenedor-tooptip">
           <div
-            class="speech-bubble speech-bubble-top collapse"
+            className="speech-bubble speech-bubble-top collapse"
             id="tooltip-opcion"
           >
             <p>Falta Opción</p>
@@ -377,7 +373,7 @@ export const Disco = () => {
 
             <div className="contenedor-tooptip">
               <div
-                class="speech-bubble speech-bubble-top collapse"
+                className="speech-bubble speech-bubble-top collapse"
                 id="tooltip-id"
               >
                 <p>Falta id</p>
@@ -416,37 +412,7 @@ export const Disco = () => {
           </div>
         </div>
 
-        {alertaFechaDeFin ? (
-          <div
-            id="alerta-de-error"
-            className="alert alert-warning-gris mt-3 mx-auto text-center"
-            role="alert"
-          >
-            <div>
-              Se va a realizar el envío sin fecha de fin del centro de
-              notificaciones.
-            </div>
-            <div>
-              {" "}
-              Por defecto, la notificación tendrá una duración de 1 día
-            </div>
-            <div className="fw-bold mt-3">¿Continuar con el envío?</div>
-            <button
-              type="button"
-              className="btn btn-push mt-2 me-2 px-3"
-              onClick={handleSi}
-            >
-              Si
-            </button>
-            <button
-              type="button"
-              className="btn btn-push mt-2 ms-2"
-              onClick={handleNo}
-            >
-              No
-            </button>
-          </div>
-        ) : null}
+       
 
         <div className="form-check">
           <input
@@ -535,8 +501,15 @@ export const Disco = () => {
         ) : null}
       </div>
 
+
+
+   
+
+
+
+
       <div className="col-4  mt-5">
-        <div className="contenedor-push">
+        <div className="tShowcontenedor-push">
           <div className="row px-2 my-auto">
             <div className=" col-2 push-logo">
               <img src={logoDisco} alt="logoDisco" />
@@ -550,6 +523,28 @@ export const Disco = () => {
           </div>
         </div>
       </div>
+     
+
+      <Modal show={show}>
+        <Modal.Header closeButton>
+          <Modal.Title>Atención</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Se va a realizar el envío sin fecha de fin del centro de
+          notificaciones. <br></br>
+          Por defecto, la notificación tendrá una duración de 1 día<br></br>
+          <div className="fw-bold "> ¿Continuar con el envío?</div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className="px-3" variant="primary" onClick={handleSi}>
+            Si
+          </Button>
+          <Button variant="secondary" onClick={handleNo}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
+     
     </div>
   );
 };
