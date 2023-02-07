@@ -168,8 +168,9 @@ width: 100px;
   border-color: #7532fa !important;
 }
 
+
 /*
-//centrado absoluto
+//centrado absoluto /////////////////////////////////////////////
 #cuadro{
   background-color: aqua;
   position: fixed;
@@ -189,3 +190,47 @@ width: 100px;
 }
 */
 
+
+
+//tooptip ////////////////////////////////////////////////////
+.alert-warning-gris {
+  --bs-alert-color: white !important;
+  --bs-alert-bg: #212529 !important;
+  --bs-alert-border-color: #363a43 !important;
+}
+
+.contenedor-tooptip{
+  position:absolute;
+}
+
+.speech-bubble {
+  position: relative;
+  top: -18px;
+  background-color: #292929;
+  width: 110px;
+  height: 28px;
+  line-height: 30px; /* vertically center */
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+   z-index: 1;
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 12px solid;
+}
+
+
+/* Position flecha */
+.speech-bubble-top:after {
+  border-bottom-color: #292929;
+  left: 50%;
+  bottom: 100%;
+  margin-left: -15px;   
+}

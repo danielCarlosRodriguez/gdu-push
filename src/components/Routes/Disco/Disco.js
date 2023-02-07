@@ -9,7 +9,6 @@ import { ExclamationOctagonFill } from "react-bootstrap-icons";
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
   const [cuerpo, setCuerpo] = useState("¡Acá va el cuerpo del mensaje! 🚀");
-
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [fechaDeEnvio, setFechaDeEnvio] = useState("");
@@ -25,18 +24,23 @@ export const Disco = () => {
   const [alertaSuccess, setAlertaSuccess] = useState(false);
   const [alertaError, setAlertaError] = useState(false);
   const [alertaWarning, setAlertaWarning] = useState(false);
-  const [message, setMessage] = useState(
-    "Ha ocurrido un error, intente nuevamente en unos minutos"
-  );
+  const [alertaFechaDeFin, setAlertaFechaDeFin] = useState(false);
+  const [continuarEnvio, setContinuarEnvio] = useState(false);
   const [checked, setChecked] = useState(false);
   const [inputId, setInputId] = useState(false);
   const [spinner, setSpinner] = useState(false);
+  const [message, setMessage] = useState(
+    "Ha ocurrido un error, intente nuevamente en unos minutos"
+  );
 
+  let mensajeValidacion = "";
 
+  //Pregunto si está logueado /////////////////////////////////////////////
   useEffect(() => {
     setToken(localStorage.getItem("tokenGduPush"));
   }, []);
 
+  //Input select ///////////////////////////////////////////////////////////
   const dataSelectTypeAmigable = [
     "",
     "ir a la home",
@@ -47,28 +51,23 @@ export const Disco = () => {
     "ir a cupones",
   ];
 
-  /*
-  const dataSelectType = [
-    "product",
-    "collection",
-    "category",
-    "home",
-    "cart",
-    "coupons",
-  ];
-  */
-
+  //Eventos al escribir en los input ////////////////////////////////////////
   function handleChange(name, value) {
-    setAlertaWarning(false)
+    setAlertaWarning(false);
     setAlertaSuccess(false);
     setAlertaError(false);
-   
-    
+    setAlertaFechaDeFin(false);
 
-    document.getElementById("title").classList.remove("is-invalid")
-    document.getElementById("body").classList.remove("is-invalid")
-    document.getElementById("deepLinkType").classList.remove("is-invalid")
-    
+    document.getElementById("title").classList.remove("is-invalid");
+    document.getElementById("body").classList.remove("is-invalid");
+    document.getElementById("deepLinkType").classList.remove("is-invalid");
+    document.getElementById("fechaDeFin").classList.remove("is-invalid");
+    document.getElementById("horaDeFin").classList.remove("is-invalid");
+
+    document.getElementById("tooltip-titulo").classList.add("collapse");
+    document.getElementById("tooltip-mensaje").classList.add("collapse");
+    document.getElementById("tooltip-opcion").classList.add("collapse");
+
     if (name === "title") {
       setTitle(value);
       setTítulo(value);
@@ -85,16 +84,19 @@ export const Disco = () => {
     }
     if (name === "fechaDeFin") {
       setFechaDeFin(value);
+      setContinuarEnvio(true);
+      setAlertaFechaDeFin(false);
+      console.log("handler cambio a true ContinuarEnvio: ", continuarEnvio);
     }
     if (name === "horaDeFin") {
       setHoraDeFin(value);
     }
     if (name === "dataLinkId") {
       setDataLinkId(value);
-      
     }
   }
 
+  //Evento al seleccionar en el input select ///////////////////////////////
   function handleChangeSelectType(e) {
     setAlertaWarning(false);
     setAlertaSuccess(false);
@@ -121,13 +123,13 @@ export const Disco = () => {
       setDataLinkType("home");
       setInputId(false);
     }
+    document.getElementById("tooltip-opcion").classList.add("collapse");
   }
 
+  //Funciones para validaciones de input ///////////////////////////////////
   useEffect(() => {
-    setMessage("")
-
-}, [dataLinkType]);
-
+    setMessage("");
+  }, [dataLinkType]);
 
   useEffect(() => {
     //console.log("dataLinkType: ", dataLinkType);
@@ -141,10 +143,12 @@ export const Disco = () => {
     ) {
       if (dataLinkId === "") {
         document.getElementById("dataLinkId").classList.add("is-invalid");
+        document.getElementById("tooltip-id").classList.remove("collapse");
         setDataLinkIdValido(false);
         //console.log("setDataLinkIdValido false", dataLinkIdValido);
       } else {
         document.getElementById("dataLinkId").classList.remove("is-invalid");
+        document.getElementById("tooltip-id").classList.add("collapse");
         setDataLinkIdValido(true);
         //console.log("setDataLinkIdValido true", dataLinkIdValido);
       }
@@ -154,16 +158,24 @@ export const Disco = () => {
       //console.log("setDataLinkIdValido true", dataLinkIdValido);
     }
   }, [dataLinkType, dataLinkIdValido, dataLinkId]);
-    
 
+  //Funciones de confirmación de fecha de fin ///////////////////////////////////
+  function handleSi() {
+    console.log("apreto Si");
+    setContinuarEnvio(true);
+    setAlertaFechaDeFin(false);
+  }
 
- 
+  function handleNo() {
+    console.log("apreto No");
+    setAlertaFechaDeFin(false);
+  }
 
+  //Función para envíar datos ///////////////////////////////////
   function handleSubmit() {
     let centerEndDate = "";
     let scheduleDate = "";
-  
-  
+
     if (fechaDeEnvio === "") {
       //console.log("fecha de envío vacía");
     } else {
@@ -180,30 +192,40 @@ export const Disco = () => {
       data: { deep_link_type: dataLinkType, deep_link_id: dataLinkId },
     };
 
+    
     if (title === "") {
-      document.getElementById("title").classList.add( "is-invalid");
-    } 
-      
+      document.getElementById("title").classList.add("is-invalid");
+      //mensajeValidacion = mensajeValidacion + "Falta Título, " 
+      //console.log("mensajeValidacion título; ", mensajeValidacion);
+      document.getElementById("tooltip-titulo").classList.remove("collapse");
+    }
+
     if (body === "") {
       document.getElementById("body").classList.add("is-invalid");
-    } 
-    
+     //mensajeValidacion = mensajeValidacion + "Falta Mensaje, " 
+     //console.log("mensajeValidacion body; ", mensajeValidacion);
+      document.getElementById("tooltip-mensaje").classList.remove("collapse");
+    }
+
     if (dataLinkType === "") {
       document.getElementById("deepLinkType").classList.add("is-invalid");
+      //mensajeValidacion = mensajeValidacion + "Falta Opción de Destino";
       //console.log("dataLinkType: ", dataLinkType);
-    } 
+      document.getElementById("tooltip-opcion").classList.remove("collapse");
+    }
 
-   
+    
+    if (!continuarEnvio) {
+      console.log("continuarEnvio false: ", continuarEnvio);
+      setAlertaFechaDeFin(true);
+      document.getElementById("fechaDeFin").classList.add("is-invalid");
+      document.getElementById("horaDeFin").classList.add("is-invalid");
+    }
 
+    console.log("mensajeValidacion xxx; ", mensajeValidacion);
+    setMessage(mensajeValidacion);
 
-
-
-    //console.log("title: ", title)
-    //console.log("body: ", body)
-    //console.log("dataLinkType: ", dataLinkType)
-    //console.log("dataLinkIdValido: ", dataLinkIdValido);
-
-    if (title && body && dataLinkType && dataLinkIdValido) {
+    if (title && body && dataLinkType && dataLinkIdValido && continuarEnvio) {
       let bodyDeDatos = {
         title,
         body,
@@ -214,8 +236,12 @@ export const Disco = () => {
         data,
       };
 
-      setSpinner(true);
       
+
+      console.log("continuarEnvio true: ", continuarEnvio);
+      setSpinner(true);
+
+      // Muestro mensaje en html //////////////////////////////
       // if (bodyDeDatos) {
       //   console.log("bodyDeDatos: ", bodyDeDatos);
       //   let txt = document.getElementById("muestro-mensaje");
@@ -224,7 +250,6 @@ export const Disco = () => {
 
       const requestOptions = {
         method: "POST",
-
         headers: {
           Accept: "application/json",
           "Content-type": "application/json",
@@ -239,7 +264,6 @@ export const Disco = () => {
         .then((data) => {
           console.log(data);
           setMessage(data.message);
-          
 
           if (data.code === "SUCCESS") {
             setAlertaSuccess(true);
@@ -260,7 +284,6 @@ export const Disco = () => {
         });
     }
   }
-
   function handleCheckFechaDeEnvio(event) {
     setChecked(!checked);
   }
@@ -281,6 +304,15 @@ export const Disco = () => {
           handleChange={handleChange}
         />
 
+        <div className="contenedor-tooptip">
+          <div
+            class="speech-bubble speech-bubble-top collapse"
+            id="tooltip-titulo"
+          >
+            <p>Falta título</p>
+          </div>
+        </div>
+
         <label className="form-label text-muted">Ingrese un mensaje</label>
         <Input
           attribute={{
@@ -293,6 +325,15 @@ export const Disco = () => {
           }}
           handleChange={handleChange}
         />
+
+        <div className="contenedor-tooptip">
+          <div
+            class="speech-bubble speech-bubble-top collapse"
+            id="tooltip-mensaje"
+          >
+            <p>Falta Mensaje</p>
+          </div>
+        </div>
 
         <label className="form-label text-muted">
           Selecciona una opción de destino
@@ -310,6 +351,15 @@ export const Disco = () => {
           ))}
         </select>
 
+        <div className="contenedor-tooptip">
+          <div
+            class="speech-bubble speech-bubble-top collapse"
+            id="tooltip-opcion"
+          >
+            <p>Falta Opción</p>
+          </div>
+        </div>
+
         {inputId ? (
           <>
             <label className="form-label text-muted">
@@ -324,6 +374,15 @@ export const Disco = () => {
               }}
               handleChange={handleChange}
             />
+
+            <div className="contenedor-tooptip">
+              <div
+                class="speech-bubble speech-bubble-top collapse"
+                id="tooltip-id"
+              >
+                <p>Falta id</p>
+              </div>
+            </div>
           </>
         ) : null}
 
@@ -356,6 +415,38 @@ export const Disco = () => {
             </div>
           </div>
         </div>
+
+        {alertaFechaDeFin ? (
+          <div
+            id="alerta-de-error"
+            className="alert alert-warning-gris mt-3 mx-auto text-center"
+            role="alert"
+          >
+            <div>
+              Se va a realizar el envío sin fecha de fin del centro de
+              notificaciones.
+            </div>
+            <div>
+              {" "}
+              Por defecto, la notificación tendrá una duración de 1 día
+            </div>
+            <div className="fw-bold mt-3">¿Continuar con el envío?</div>
+            <button
+              type="button"
+              className="btn btn-push mt-2 me-2 px-3"
+              onClick={handleSi}
+            >
+              Si
+            </button>
+            <button
+              type="button"
+              className="btn btn-push mt-2 ms-2"
+              onClick={handleNo}
+            >
+              No
+            </button>
+          </div>
+        ) : null}
 
         <div className="form-check">
           <input
@@ -437,15 +528,11 @@ export const Disco = () => {
           </div>
         ) : null}
 
-        
         {spinner ? (
-         <div className="row">
-          <div className="spinner-border mx-auto" role="status">
-            </div>
+          <div className="row">
+            <div className="spinner-border mx-auto" role="status"></div>
           </div>
-         ) : null}
-
-        
+        ) : null}
       </div>
 
       <div className="col-4  mt-5">
