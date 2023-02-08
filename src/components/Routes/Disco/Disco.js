@@ -7,7 +7,6 @@ import { ExclamationTriangleFill } from "react-bootstrap-icons";
 import { ExclamationOctagonFill } from "react-bootstrap-icons";
 import { Modal, Button } from "react-bootstrap";
 
-
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
   const [cuerpo, setCuerpo] = useState("¡Acá va el cuerpo del mensaje! 🚀");
@@ -35,10 +34,6 @@ export const Disco = () => {
     "Ha ocurrido un error, intente nuevamente en unos minutos"
   );
 
-
-   
-
-  
   //Pregunto si está logueado /////////////////////////////////////////////
   useEffect(() => {
     setToken(localStorage.getItem("tokenGduPush"));
@@ -60,7 +55,6 @@ export const Disco = () => {
     setAlertaWarning(false);
     setAlertaSuccess(false);
     setAlertaError(false);
-   
 
     document.getElementById("title").classList.remove("is-invalid");
     document.getElementById("body").classList.remove("is-invalid");
@@ -170,11 +164,9 @@ export const Disco = () => {
   }
 
   function handleNo() {
-   //console.log("apreto No");
-   setShow(false);
-   }
-
-
+    //console.log("apreto No");
+    setShow(false);
+  }
 
   //Función para envíar datos ///////////////////////////////////
   function handleSubmit() {
@@ -197,7 +189,6 @@ export const Disco = () => {
       data: { deep_link_type: dataLinkType, deep_link_id: dataLinkId },
     };
 
-    
     if (title === "") {
       document.getElementById("title").classList.add("is-invalid");
       document.getElementById("tooltip-titulo").classList.remove("collapse");
@@ -213,18 +204,7 @@ export const Disco = () => {
       document.getElementById("tooltip-opcion").classList.remove("collapse");
     }
 
-    
-    if (!continuarEnvio) {
-      //console.log("continuarEnvio false: ", continuarEnvio);
-      document.getElementById("fechaDeFin").classList.add("is-invalid");
-      document.getElementById("horaDeFin").classList.add("is-invalid");
-       
-       setShow(true);
-      
-    }
-
- 
-    if (title && body && dataLinkType && dataLinkIdValido && continuarEnvio) {
+    if (title && body && dataLinkType && dataLinkIdValido) {
       let bodyDeDatos = {
         title,
         body,
@@ -235,49 +215,61 @@ export const Disco = () => {
         data,
       };
 
-      setSpinner(true);
+      // Última validación, Fecha de fin //////////////////////////////
+      if (!continuarEnvio) {
+        //console.log("continuarEnvio false: ", continuarEnvio);
+        document.getElementById("fechaDeFin").classList.add("is-invalid");
+        document.getElementById("horaDeFin").classList.add("is-invalid");
 
-      // Muestro mensaje en html //////////////////////////////
-      //if (bodyDeDatos) {
-      //console.log("bodyDeDatos: ", bodyDeDatos);
-      //let txt = document.getElementById("muestro-mensaje");
-      //txt.innerHTML = JSON.stringify(bodyDeDatos);
-      // }
+        setShow(true);
+      } else {
+        setSpinner(true);
 
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        //body: bodyDeDatos,
-        body: JSON.stringify(bodyDeDatos),
-      };
+        // Muestro mensaje en html //////////////////////////////
+        //if (bodyDeDatos) {
+        //console.log("bodyDeDatos: ", bodyDeDatos);
+        //let txt = document.getElementById("muestro-mensaje");
+        //txt.innerHTML = JSON.stringify(bodyDeDatos);
+        // }
 
-      fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setMessage(data.message);
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          //body: bodyDeDatos,
+          body: JSON.stringify(bodyDeDatos),
+        };
 
-          if (data.code === "SUCCESS") {
-            setAlertaSuccess(true);
-            setAlertaWarning(false);
-            setAlertaError(false);
+        fetch(
+          "https://api-test.disco.com.uy/notifications/send",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setMessage(data.message);
+
+            if (data.code === "SUCCESS") {
+              setAlertaSuccess(true);
+              setAlertaWarning(false);
+              setAlertaError(false);
+              setSpinner(false);
+            } else {
+              setAlertaSuccess(false);
+              setAlertaWarning(true);
+              setAlertaError(false);
+              setSpinner(false);
+            }
+          })
+          .catch((error) => {
+            console.error("Error =>", error);
+            setAlertaError(true);
             setSpinner(false);
-          } else {
-            setAlertaSuccess(false);
-            setAlertaWarning(true);
-            setAlertaError(false);
-            setSpinner(false);
-          }
-        })
-        .catch((error) => {
-          console.error("Error =>", error);
-          setAlertaError(true);
-          setSpinner(false);
-        });
+          });
+      }
     }
   }
   function handleCheckFechaDeEnvio(event) {
@@ -287,6 +279,7 @@ export const Disco = () => {
   return (
     <div className="row mb-5">
       <div className="col-4 mx-5 my-5">
+        {/* Input Título //////////////////////////////////////////////*/}
         <label className="form-label text-muted">Ingrese un título</label>
         <Input
           attribute={{
@@ -309,6 +302,7 @@ export const Disco = () => {
           </div>
         </div>
 
+        {/* Input Mensaje //////////////////////////////////////////////*/}
         <label className="form-label text-muted">Ingrese un mensaje</label>
         <Input
           attribute={{
@@ -331,6 +325,7 @@ export const Disco = () => {
           </div>
         </div>
 
+        {/* Input Opción //////////////////////////////////////////////*/}
         <label className="form-label text-muted">
           Selecciona una opción de destino
         </label>
@@ -356,6 +351,7 @@ export const Disco = () => {
           </div>
         </div>
 
+        {/* Input ID //////////////////////////////////////////////*/}
         {inputId ? (
           <>
             <label className="form-label text-muted">
@@ -382,6 +378,7 @@ export const Disco = () => {
           </>
         ) : null}
 
+        {/* Input Fecha de Fin //////////////////////////////////////////////*/}
         <label className="form-label text-muted">Fecha de fin del centro</label>
         <div className="row g-2">
           <div className="col-md">
@@ -412,8 +409,7 @@ export const Disco = () => {
           </div>
         </div>
 
-       
-
+        {/* Input Fecha de envío //////////////////////////////////////////////*/}
         <div className="form-check">
           <input
             className="form-check-input"
@@ -458,10 +454,12 @@ export const Disco = () => {
           </div>
         ) : null}
 
+        {/* Botón Enviar //////////////////////////////////////////////*/}
         <div className="btn btn-push mt-3" onClick={handleSubmit}>
           Enviar
         </div>
 
+        {/* Alertas ///////////////////////////////////////////////////*/}
         {alertaSuccess ? (
           <div
             className="alert alert-success mt-3 mx-auto text-center"
@@ -501,15 +499,9 @@ export const Disco = () => {
         ) : null}
       </div>
 
-
-
-   
-
-
-
-
+      {/* Vista Mobile //////////////////////////////////////////////*/}
       <div className="col-4  mt-5">
-        <div className="tShowcontenedor-push">
+        <div className="contenedor-push">
           <div className="row px-2 my-auto">
             <div className=" col-2 push-logo">
               <img src={logoDisco} alt="logoDisco" />
@@ -523,8 +515,8 @@ export const Disco = () => {
           </div>
         </div>
       </div>
-     
 
+      {/* Modal  ////////////////////////////////////////////////*/}
       <Modal show={show}>
         <Modal.Header closeButton>
           <Modal.Title>Atención</Modal.Title>
@@ -544,7 +536,6 @@ export const Disco = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-     
     </div>
   );
 };
