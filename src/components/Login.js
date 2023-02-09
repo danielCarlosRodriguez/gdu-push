@@ -73,38 +73,46 @@ export const Login = () => {
   return (
     <>
       <div className="fondo">
-        <div className="container vh-100 row justify-content-center align-items-center mx-auto">
-          <div className="row d-flex">
-            <form className="bg-light shadow p-3 bg-body rounded w-25 mx-auto ">
-              <label className="form-label">Email address</label>
-              <input
-                type="user"
-                className="form-control"
-                id="user"
-                onChange={handleUser}
-              ></input>
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                onChange={handlePass}
-              ></input>
-              <button className="btn btn-primary mt-3" onClick={handleClick}>
-                enviar
-              </button>
-            </form>
-            {alerta ? (
-              <div
-                className="alert alert-danger w-25 mx-auto text-center"
-                role="alert"
-              >
-                Usuario o Contraseña Incorrecta
-              </div>
-            ) : null}
+        <div className="container vh-100">
+          <div className="contenedor-formulario ">
+            <div className="fs-0 mx-auto text-center">GDU-Push</div>
+            <div className="row ">
+              <form className="shadow p-3 bg-light rounded mx-auto">
+                <label className="form-label">Email address</label>
+                <input
+                  type="user"
+                  className="form-control"
+                  id="user"
+                  onChange={handleUser}
+                ></input>
+                <label className="form-label">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  onChange={handlePass}
+                ></input>
+                <button className="btn btn-push mt-3" onClick={handleClick}>
+                  enviar
+                </button>
+              </form>
+            </div>
+
+            <div className="row">
+              {alerta ? (
+                <div
+                  className="alert alert-danger mt-3 mx-auto text-center"
+                  role="alert"
+                >
+                  Usuario o Contraseña Incorrecta
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
+
+     
     </>
   );
 };
