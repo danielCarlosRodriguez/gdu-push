@@ -70,7 +70,7 @@ $colorpush: #7532fa;
 // }
 
 
-
+//Botón Sidebar
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   background-color: $colorpush !important;
 
@@ -257,11 +257,22 @@ width: 100px;
 
  @media (max-width: 576px) {
     
-            .sticky-top {
+        .sticky-top {
             height: 55px;
         }
 
         .h-sm-100 {
             height: 100%;
         }
+         
+        .nombre-gdu{
+          margin-top: 0.4rem !important;
+          font-size: 0.8rem !important;
+        }
+    
     } 
+
+.nombre-gdu{
+    margin-top: 1.5rem;
+
+  }

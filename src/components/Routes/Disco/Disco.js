@@ -6,6 +6,8 @@ import { CheckCircleFill } from "react-bootstrap-icons";
 import { ExclamationTriangleFill } from "react-bootstrap-icons";
 import { ExclamationOctagonFill } from "react-bootstrap-icons";
 import { Modal, Button } from "react-bootstrap";
+import { Cart4 } from "react-bootstrap-icons"
+
 
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
@@ -279,12 +281,7 @@ export const Disco = () => {
   return (
     <div className="col d-flex flex-column h-sm-100 ">
       <main className="row overflow-auto mt-5 mx-2">
-
-
         <div className="col-md-6 col-12">
-
-
-
           {/* Input Título //////////////////////////////////////////////*/}
           <label className="form-label text-muted">Ingrese un título</label>
           <Input
@@ -511,7 +508,7 @@ export const Disco = () => {
           ) : null}
         </div>
 
-        <div className="col-md-6 col-12">
+        <div className="col-md-6 col-12 mb-5">
           <div className="contenedor-push">
             <div className="row px-2 my-auto">
               <div className=" col-2 push-logo">
@@ -528,8 +525,11 @@ export const Disco = () => {
         </div>
       </main>
 
-      <footer className="row bg-light py-4 mt-auto">
-        <div className="col">Footer content here...</div>
+      <footer className="row bg-light py-4 mt-auto text-end">
+        <div className="col">
+          <Cart4 className="me-2" />
+          e-commerce GDU | 2021
+        </div>
       </footer>
 
       {/* Modal  ////////////////////////////////////////////////*/}
