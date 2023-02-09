@@ -281,7 +281,7 @@ export const Disco = () => {
   return (
     <div className="col d-flex flex-column h-sm-100 ">
       <main className="row overflow-auto mt-5 mx-2">
-        <div className="col-md-6 col-12">
+        <div className="col-md-6 col-12 order-md-1 order-2 ">
           {/* Input Título //////////////////////////////////////////////*/}
           <label className="form-label text-muted">Ingrese un título</label>
           <Input
@@ -508,7 +508,7 @@ export const Disco = () => {
           ) : null}
         </div>
 
-        <div className="col-md-6 col-12 mb-5">
+        <div className="col-md-6 col-12 mb-5 order-md-2 order-1">
           <div className="contenedor-push">
             <div className="row px-2 my-auto">
               <div className=" col-2 push-logo">
