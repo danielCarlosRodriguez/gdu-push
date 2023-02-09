@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 
 import { Home } from "./Routes/Home/Home";
@@ -20,11 +21,13 @@ export const Dashboard = () => {
 
   return (
     <BrowserRouter>
-      <div className="container-fluid overflow-hidden">
-        <div className="row vh-100 overflow-auto">
-          <Sidebar />
+      
 
-          
+      <div className="flex">
+        <Sidebar />
+
+        <div className="content w-100">
+          <Navbar />
 
           <Routes>
             <Route exact path="/" element={<Home />} />
@@ -35,12 +38,9 @@ export const Dashboard = () => {
             <Route exact path="/estadisticas" element={<Estadisticas />} />
             <Route exact path="/mensaje" element={<MensajePush />} />
           </Routes>
-
-
-
-
-
         </div>
+
+        
       </div>
     </BrowserRouter>
   );

@@ -50,24 +50,34 @@ $colorpush: #7532fa;
 
 
 
-.sidebar {
-  width: 14rem;
-  height: 107vh;
-  border-right: 1px solid $gray;
-  ul {
-    list-style: none;
-    padding: 1rem 1rem;
-    li {
-      margin-bottom: 1rem;
-      a {
-        text-decoration: none;
-        &.active {
-          background-color: $colorpush;
-        }
-      }
-    }
-  }
+// .sidebar {
+//   width: 14rem;
+//   height: 107vh;
+//   border-right: 1px solid $gray;
+//   ul {
+//     list-style: none;
+//     padding: 1rem 1rem;
+//     li {
+//       margin-bottom: 1rem;
+//       a {
+//         text-decoration: none;
+//         &.active {
+//           background-color: $colorpush;
+//         }
+//       }
+//     }
+//   }
+// }
+
+
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: $colorpush !important;
+
 }
+
+
+
 
 .contenedor-telefono {
   position: relative;
@@ -77,7 +87,7 @@ $colorpush: #7532fa;
 
 .contenedor-push {
   background-color: white;
-  width: 450px;
+  width: 337px;
   height: 100px;
   border-radius: 30px;
   border: 0.5px solid #ccc;
@@ -159,13 +169,13 @@ width: 100px;
 }
 
 .fondo{
-  background-color: #7532fa;
+  background-color: $colorpush;
   
 }
 
 .form-check-input:checked {
-  background-color: #7532fa !important;
-  border-color: #7532fa !important;
+  background-color: $colorpush !important;
+  border-color: $colorpush !important;
 }
 
 
@@ -243,3 +253,15 @@ width: 100px;
   bottom: 100%;
   margin-left: -15px;   
 }
+
+
+ @media (max-width: 576px) {
+    
+            .sticky-top {
+            height: 55px;
+        }
+
+        .h-sm-100 {
+            height: 100%;
+        }
+    } 

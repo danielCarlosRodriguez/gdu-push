@@ -277,165 +277,129 @@ export const Disco = () => {
   }
 
   return (
-    <div className="row mb-5">
-      <div className="col-4 mx-5 my-5">
-        {/* Input Título //////////////////////////////////////////////*/}
-        <label className="form-label text-muted">Ingrese un título</label>
-        <Input
-          attribute={{
-            id: "title",
-            name: "title",
-            type: "text",
-            placeholder: "",
-            maxLength: "22",
-            className: `form-control mb-3`,
-          }}
-          handleChange={handleChange}
-        />
+    <div className="col d-flex flex-column h-sm-100 ">
+      <main className="row overflow-auto mt-5 mx-2">
 
-        <div className="contenedor-tooptip">
-          <div
-            className="speech-bubble speech-bubble-top collapse"
-            id="tooltip-titulo"
-          >
-            <p>Falta Título</p>
-          </div>
-        </div>
 
-        {/* Input Mensaje //////////////////////////////////////////////*/}
-        <label className="form-label text-muted">Ingrese un mensaje</label>
-        <Input
-          attribute={{
-            id: "body",
-            name: "body",
-            type: "text",
-            placeholder: "",
-            maxLength: "31",
-            className: `form-control mb-3`,
-          }}
-          handleChange={handleChange}
-        />
+        <div className="col-md-6 col-12">
 
-        <div className="contenedor-tooptip">
-          <div
-            className="speech-bubble speech-bubble-top collapse"
-            id="tooltip-mensaje"
-          >
-            <p>Falta Mensaje</p>
-          </div>
-        </div>
 
-        {/* Input Opción //////////////////////////////////////////////*/}
-        <label className="form-label text-muted">
-          Selecciona una opción de destino
-        </label>
-        <select
-          id="deepLinkType"
-          className="form-select mb-3 text-muted"
-          name="deepLinkType"
-          onChange={handleChangeSelectType}
-        >
-          {dataSelectTypeAmigable.map((item, i) => (
-            <option key={i} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
 
-        <div className="contenedor-tooptip">
-          <div
-            className="speech-bubble speech-bubble-top collapse"
-            id="tooltip-opcion"
-          >
-            <p>Falta Opción</p>
-          </div>
-        </div>
-
-        {/* Input ID //////////////////////////////////////////////*/}
-        {inputId ? (
-          <>
-            <label className="form-label text-muted">
-              id de producto, colección o categorías
-            </label>
-            <Input
-              attribute={{
-                id: "dataLinkId",
-                name: "dataLinkId",
-                type: "text",
-                className: `form-control mb-3`,
-              }}
-              handleChange={handleChange}
-            />
-
-            <div className="contenedor-tooptip">
-              <div
-                className="speech-bubble speech-bubble-top collapse"
-                id="tooltip-id"
-              >
-                <p>Falta id</p>
-              </div>
-            </div>
-          </>
-        ) : null}
-
-        {/* Input Fecha de Fin //////////////////////////////////////////////*/}
-        <label className="form-label text-muted">Fecha de fin del centro</label>
-        <div className="row g-2">
-          <div className="col-md">
-            <div className="form-floating">
-              <input
-                type="date"
-                className="form-control mb-3"
-                id="fechaDeFin"
-                name="fechaDeFin"
-                onChange={(e) => handleChange(e.target.name, e.target.value)}
-              />
-
-              <label>Fecha de fin</label>
-            </div>
-          </div>
-          <div className="col-md">
-            <div className="form-floating">
-              <input
-                type="time"
-                className="form-control mb-3"
-                id="horaDeFin"
-                name="horaDeFin"
-                onChange={(e) => handleChange(e.target.name, e.target.value)}
-              />
-
-              <label>Hora de fin</label>
-            </div>
-          </div>
-        </div>
-
-        {/* Input Fecha de envío //////////////////////////////////////////////*/}
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value=""
-            id="check-fecha-de-envio"
-            onChange={handleCheckFechaDeEnvio}
+          {/* Input Título //////////////////////////////////////////////*/}
+          <label className="form-label text-muted">Ingrese un título</label>
+          <Input
+            attribute={{
+              id: "title",
+              name: "title",
+              type: "text",
+              placeholder: "",
+              maxLength: "22",
+              className: `form-control mb-3`,
+            }}
+            handleChange={handleChange}
           />
-          <label className="form-check-label mb-2 ">
-            Programar fecha de envío
-          </label>
-        </div>
 
-        {checked ? (
+          <div className="contenedor-tooptip">
+            <div
+              className="speech-bubble speech-bubble-top collapse"
+              id="tooltip-titulo"
+            >
+              <p>Falta Título</p>
+            </div>
+          </div>
+
+          {/* Input Mensaje //////////////////////////////////////////////*/}
+          <label className="form-label text-muted">Ingrese un mensaje</label>
+          <Input
+            attribute={{
+              id: "body",
+              name: "body",
+              type: "text",
+              placeholder: "",
+              maxLength: "31",
+              className: `form-control mb-3`,
+            }}
+            handleChange={handleChange}
+          />
+
+          <div className="contenedor-tooptip">
+            <div
+              className="speech-bubble speech-bubble-top collapse"
+              id="tooltip-mensaje"
+            >
+              <p>Falta Mensaje</p>
+            </div>
+          </div>
+
+          {/* Input Opción //////////////////////////////////////////////*/}
+          <label className="form-label text-muted">
+            Selecciona una opción de destino
+          </label>
+          <select
+            id="deepLinkType"
+            className="form-select mb-3 text-muted"
+            name="deepLinkType"
+            onChange={handleChangeSelectType}
+          >
+            {dataSelectTypeAmigable.map((item, i) => (
+              <option key={i} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+
+          <div className="contenedor-tooptip">
+            <div
+              className="speech-bubble speech-bubble-top collapse"
+              id="tooltip-opcion"
+            >
+              <p>Falta Opción</p>
+            </div>
+          </div>
+
+          {/* Input ID //////////////////////////////////////////////*/}
+          {inputId ? (
+            <>
+              <label className="form-label text-muted">
+                id de producto, colección o categorías
+              </label>
+              <Input
+                attribute={{
+                  id: "dataLinkId",
+                  name: "dataLinkId",
+                  type: "text",
+                  className: `form-control mb-3`,
+                }}
+                handleChange={handleChange}
+              />
+
+              <div className="contenedor-tooptip">
+                <div
+                  className="speech-bubble speech-bubble-top collapse"
+                  id="tooltip-id"
+                >
+                  <p>Falta id</p>
+                </div>
+              </div>
+            </>
+          ) : null}
+
+          {/* Input Fecha de Fin //////////////////////////////////////////////*/}
+          <label className="form-label text-muted">
+            Fecha de fin del centro
+          </label>
           <div className="row g-2">
             <div className="col-md">
               <div className="form-floating">
                 <input
                   type="date"
                   className="form-control mb-3"
-                  id="fechaDeEnvio"
-                  name="fechaDeEnvio"
+                  id="fechaDeFin"
+                  name="fechaDeFin"
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
 
-                <label>Fecha de envío</label>
+                <label>Fecha de fin</label>
               </div>
             </div>
             <div className="col-md">
@@ -443,78 +407,130 @@ export const Disco = () => {
                 <input
                   type="time"
                   className="form-control mb-3"
-                  id="horaDeEnvio"
-                  name="horaDeEnvio"
+                  id="horaDeFin"
+                  name="horaDeFin"
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
 
-                <label>Hora de envío</label>
+                <label>Hora de fin</label>
               </div>
             </div>
           </div>
-        ) : null}
 
-        {/* Botón Enviar //////////////////////////////////////////////*/}
-        <div className="btn btn-push mt-3" onClick={handleSubmit}>
-          Enviar
-        </div>
-
-        {/* Alertas ///////////////////////////////////////////////////*/}
-        {alertaSuccess ? (
-          <div
-            className="alert alert-success mt-3 mx-auto text-center"
-            role="alert"
-          >
-            <CheckCircleFill /> {}
-            Envío Exitoso
+          {/* Input Fecha de envío //////////////////////////////////////////////*/}
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="check-fecha-de-envio"
+              onChange={handleCheckFechaDeEnvio}
+            />
+            <label className="form-check-label mb-2 ">
+              Programar fecha de envío
+            </label>
           </div>
-        ) : null}
 
-        {alertaError ? (
-          <div
-            id="alerta-de-error"
-            className="alert alert-danger mt-3 mx-auto text-center"
-            role="alert"
-          >
-            <ExclamationOctagonFill /> {}
-            Ha ocurrido un error, intente nuevamente en unos minutos
-          </div>
-        ) : null}
+          {checked ? (
+            <div className="row g-2">
+              <div className="col-md">
+                <div className="form-floating">
+                  <input
+                    type="date"
+                    className="form-control mb-3"
+                    id="fechaDeEnvio"
+                    name="fechaDeEnvio"
+                    onChange={(e) =>
+                      handleChange(e.target.name, e.target.value)
+                    }
+                  />
 
-        {alertaWarning ? (
-          <div
-            id="alerta-de-error"
-            className="alert alert-warning mt-3 mx-auto text-center"
-            role="alert"
-          >
-            <ExclamationTriangleFill /> {}
-            {message}
-          </div>
-        ) : null}
-
-        {spinner ? (
-          <div className="row">
-            <div className="spinner-border mx-auto" role="status"></div>
-          </div>
-        ) : null}
-      </div>
-
-      {/* Vista Mobile //////////////////////////////////////////////*/}
-      <div className="col-4  mt-5">
-        <div className="contenedor-push">
-          <div className="row px-2 my-auto">
-            <div className=" col-2 push-logo">
-              <img src={logoDisco} alt="logoDisco" />
-            </div>
-            <div className=" col-10  ps-2 text-start push-texto fs-6">
-              <div>
-                <strong>{titulo}</strong>
+                  <label>Fecha de envío</label>
+                </div>
               </div>
-              <div>{cuerpo}</div>
+              <div className="col-md">
+                <div className="form-floating">
+                  <input
+                    type="time"
+                    className="form-control mb-3"
+                    id="horaDeEnvio"
+                    name="horaDeEnvio"
+                    onChange={(e) =>
+                      handleChange(e.target.name, e.target.value)
+                    }
+                  />
+
+                  <label>Hora de envío</label>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          {/* Botón Enviar //////////////////////////////////////////////*/}
+          <div className="btn btn-push my-3 " onClick={handleSubmit}>
+            Enviar
+          </div>
+
+          {/* Alertas ///////////////////////////////////////////////////*/}
+          {alertaSuccess ? (
+            <div
+              className="alert alert-success mt-3 mx-auto text-center"
+              role="alert"
+            >
+              <CheckCircleFill /> {}
+              Envío Exitoso
+            </div>
+          ) : null}
+
+          {alertaError ? (
+            <div
+              id="alerta-de-error"
+              className="alert alert-danger mt-3 mx-auto text-center"
+              role="alert"
+            >
+              <ExclamationOctagonFill /> {}
+              Ha ocurrido un error, intente nuevamente en unos minutos
+            </div>
+          ) : null}
+
+          {alertaWarning ? (
+            <div
+              id="alerta-de-error"
+              className="alert alert-warning mt-3 mx-auto text-center"
+              role="alert"
+            >
+              <ExclamationTriangleFill /> {}
+              {message}
+            </div>
+          ) : null}
+
+          {spinner ? (
+            <div className="row">
+              <div className="spinner-border mx-auto" role="status"></div>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="col-md-6 col-12">
+          <div className="contenedor-push">
+            <div className="row px-2 my-auto">
+              <div className=" col-2 push-logo">
+                <img src={logoDisco} alt="logoDisco" />
+              </div>
+              <div className=" col-10  ps-4 text-start push-texto fs-6">
+                <div>
+                  <strong>{titulo}</strong>
+                </div>
+                <div>{cuerpo}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
+
+      <footer className="row bg-light py-4 mt-auto">
+        <div className="col">Footer content here...</div>
+      </footer>
 
       {/* Modal  ////////////////////////////////////////////////*/}
       <Modal show={show}>
