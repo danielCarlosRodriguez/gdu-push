@@ -281,101 +281,148 @@ export const Geant = () => {
     <div className="col d-flex flex-column h-sm-100 ">
       <main className="row overflow-auto mt-5 mx-2">
         <div className="col-md-6 col-12 order-md-1 order-2 ">
-          {/* Input Título //////////////////////////////////////////////*/}
-          <label className="form-label text-muted">Ingrese un título</label>
-          <Input
-            attribute={{
-              id: "title",
-              name: "title",
-              type: "text",
-              placeholder: "",
-              maxLength: "22",
-              className: `form-control mb-3`,
-            }}
-            handleChange={handleChange}
-          />
 
-          <div className="contenedor-tooptip">
-            <div
-              className="speech-bubble speech-bubble-top collapse"
+          
+          {/* Input Título //////////////////////////////////////////////*/}
+          <div className="position-relative">
+            <label className="form-label text-muted">Ingrese un título</label>
+            <Input
+              attribute={{
+                id: "title",
+                name: "title",
+                type: "text",
+                placeholder: "",
+                maxLength: "22",
+                className: `form-control mb-3`,
+              }}
+              handleChange={handleChange}
+            />
+
+            <button
+              type="button"
+              class="btn btn-dark position-absolute tooltip-position collapse"
               id="tooltip-titulo"
             >
-              <p>Falta Título</p>
-            </div>
+              Falta Título{" "}
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="position-absolute top-100 start-50 translate-middle mt-1"
+                fill="#212529"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+              </svg>
+            </button>
           </div>
 
+          
           {/* Input Mensaje //////////////////////////////////////////////*/}
-          <label className="form-label text-muted">Ingrese un mensaje</label>
-          <Input
-            attribute={{
-              id: "body",
-              name: "body",
-              type: "text",
-              placeholder: "",
-              maxLength: "31",
-              className: `form-control mb-3`,
-            }}
-            handleChange={handleChange}
-          />
+          <div className="position-relative">
+            <label className="form-label text-muted">Ingrese un mensaje</label>
+            <Input
+              attribute={{
+                id: "body",
+                name: "body",
+                type: "text",
+                placeholder: "",
+                maxLength: "31",
+                className: `form-control mb-3`,
+              }}
+              handleChange={handleChange}
+            />
 
-          <div className="contenedor-tooptip">
-            <div
-              className="speech-bubble speech-bubble-top collapse"
+            <button
+              type="button"
+              className="btn btn-dark position-absolute tooltip-position collapse"
               id="tooltip-mensaje"
             >
-              <p>Falta Mensaje</p>
-            </div>
+              Falta Mensaje{" "}
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                className="position-absolute top-100 start-50 translate-middle mt-1"
+                fill="#212529"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+              </svg>
+            </button>
           </div>
 
           {/* Input Opción //////////////////////////////////////////////*/}
-          <label className="form-label text-muted">
-            Selecciona una opción de destino
-          </label>
-          <select
-            id="deepLinkType"
-            className="form-select mb-3 text-muted"
-            name="deepLinkType"
-            onChange={handleChangeSelectType}
-          >
-            {dataSelectTypeAmigable.map((item, i) => (
-              <option key={i} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+          <div className="position-relative">
+            <label className="form-label text-muted">
+              Selecciona una opción de destino
+            </label>
+            <select
+              id="deepLinkType"
+              className="form-select mb-3 text-muted"
+              name="deepLinkType"
+              onChange={handleChangeSelectType}
+            >
+              {dataSelectTypeAmigable.map((item, i) => (
+                <option key={i} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
 
-          <div className="contenedor-tooptip">
-            <div
-              className="speech-bubble speech-bubble-top collapse"
+            <button
+              type="button"
+              className="btn btn-dark position-absolute tooltip-position collapse"
               id="tooltip-opcion"
             >
-              <p>Falta Opción</p>
-            </div>
+              Falta Opción{" "}
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                className="position-absolute top-100 start-50 translate-middle mt-1"
+                fill="#212529"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+              </svg>
+            </button>
           </div>
 
           {/* Input ID //////////////////////////////////////////////*/}
           {inputId ? (
             <>
-              <label className="form-label text-muted">
-                id de producto, colección o categorías
-              </label>
-              <Input
-                attribute={{
-                  id: "dataLinkId",
-                  name: "dataLinkId",
-                  type: "text",
-                  className: `form-control mb-3`,
-                }}
-                handleChange={handleChange}
-              />
+              <div className="position-relative">
+                <label className="form-label text-muted">
+                  id de producto, colección o categorías
+                </label>
+                <Input
+                  attribute={{
+                    id: "dataLinkId",
+                    name: "dataLinkId",
+                    type: "text",
+                    className: `form-control mb-3`,
+                  }}
+                  handleChange={handleChange}
+                />
 
-              <div className="contenedor-tooptip">
-                <div
-                  className="speech-bubble speech-bubble-top collapse"
+                <button
+                  type="button"
+                  class="btn btn-dark position-absolute tooltip-position collapse "
                   id="tooltip-id"
                 >
-                  <p>Falta id</p>
-                </div>
+                  Falta id{" "}
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="position-absolute top-100 start-50 translate-middle mt-1"
+                    fill="#212529"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+                  </svg>
+                </button>
               </div>
             </>
           ) : null}
