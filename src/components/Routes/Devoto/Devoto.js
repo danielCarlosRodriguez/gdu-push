@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "../../Input";
 import logoDevoto from "../../../img/logos-devoto-push-v1.png";
+import { Footer } from "../../Footer";
 
 import { CheckCircleFill } from "react-bootstrap-icons";
 import { ExclamationTriangleFill } from "react-bootstrap-icons";
 import { ExclamationOctagonFill } from "react-bootstrap-icons";
 import { Modal, Button } from "react-bootstrap";
-import { Cart4 } from "react-bootstrap-icons";
+
 
 export const Devoto = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
@@ -315,7 +316,6 @@ export const Devoto = () => {
             </button>
           </div>
 
-          
           {/* Input Mensaje //////////////////////////////////////////////*/}
           <div className="position-relative">
             <label className="form-label text-muted">Ingrese un mensaje</label>
@@ -569,12 +569,7 @@ export const Devoto = () => {
         </div>
       </main>
 
-      <footer className="row bg-light py-4 mt-auto text-end">
-        <div className="col">
-          <Cart4 className="me-2" />
-          e-commerce GDU | 2021
-        </div>
-      </footer>
+      <Footer />
 
       {/* Modal  ////////////////////////////////////////////////*/}
       <Modal show={show}>

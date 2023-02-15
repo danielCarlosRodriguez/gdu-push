@@ -96,7 +96,7 @@ export const Sidebar = () => {
             aria-labelledby="dropdownUser1"
           >
             <li>
-              <li className="dropdown-item">{user}</li>
+              <div className="dropdown-item">{user}</div>
             </li>
             <li>
               <hr className="dropdown-divider" />

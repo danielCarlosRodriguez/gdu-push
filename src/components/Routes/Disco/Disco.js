@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "../../Input";
 import logoDisco from "../../../img/logos-disco-push-v1.png";
+import { Footer } from "../../Footer";
 
 import { CheckCircleFill } from "react-bootstrap-icons";
 import { ExclamationTriangleFill } from "react-bootstrap-icons";
 import { ExclamationOctagonFill } from "react-bootstrap-icons";
 import { Modal, Button } from "react-bootstrap";
-import { Cart4 } from "react-bootstrap-icons";
+
+
 
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
@@ -281,8 +283,6 @@ export const Disco = () => {
     <div className="col d-flex flex-column h-sm-100 ">
       <main className="row overflow-auto mt-5 mx-2">
         <div className="col-md-6 col-12 order-md-1 order-2 ">
-
-          
           {/* Input Título //////////////////////////////////////////////*/}
           <div className="position-relative">
             <label className="form-label text-muted">Ingrese un título</label>
@@ -300,7 +300,7 @@ export const Disco = () => {
 
             <button
               type="button"
-              class="btn btn-dark position-absolute tooltip-position collapse"
+              className="btn btn-dark position-absolute tooltip-position collapse"
               id="tooltip-titulo"
             >
               Falta Título{" "}
@@ -308,7 +308,7 @@ export const Disco = () => {
                 width="1em"
                 height="1em"
                 viewBox="0 0 16 16"
-                class="position-absolute top-100 start-50 translate-middle mt-1"
+                className="position-absolute top-100 start-50 translate-middle mt-1"
                 fill="#212529"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -317,7 +317,6 @@ export const Disco = () => {
             </button>
           </div>
 
-          
           {/* Input Mensaje //////////////////////////////////////////////*/}
           <div className="position-relative">
             <label className="form-label text-muted">Ingrese un mensaje</label>
@@ -408,7 +407,7 @@ export const Disco = () => {
 
                 <button
                   type="button"
-                  class="btn btn-dark position-absolute tooltip-position collapse "
+                  className="btn btn-dark position-absolute tooltip-position collapse "
                   id="tooltip-id"
                 >
                   Falta id{" "}
@@ -416,7 +415,7 @@ export const Disco = () => {
                     width="1em"
                     height="1em"
                     viewBox="0 0 16 16"
-                    class="position-absolute top-100 start-50 translate-middle mt-1"
+                    className="position-absolute top-100 start-50 translate-middle mt-1"
                     fill="#212529"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -571,16 +570,11 @@ export const Disco = () => {
         </div>
       </main>
 
-      <footer className="row bg-light py-4 mt-auto text-end">
-        <div className="col">
-          <Cart4 className="me-2" />
-          e-commerce GDU | 2021
-        </div>
-      </footer>
+      <Footer/>
 
       {/* Modal  ////////////////////////////////////////////////*/}
       <Modal show={show}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton onClick={handleNo}>
           <Modal.Title>Atención</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -598,6 +592,8 @@ export const Disco = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      
     </div>
   );
 };
