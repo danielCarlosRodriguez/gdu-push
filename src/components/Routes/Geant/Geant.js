@@ -163,6 +163,8 @@ export const Geant = () => {
     //console.log("apreto Si");
     setContinuarEnvio(true);
     setShow(false);
+    document.getElementById("fechaDeFin").classList.remove("is-invalid");
+    document.getElementById("horaDeFin").classList.remove("is-invalid");    
   }
 
   function handleNo() {
