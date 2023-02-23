@@ -49,6 +49,7 @@ export const Disco = () => {
     "link a un producto",
     "link a una colección",
     "link a una categoría",
+    "link a una landing",
     "ir al carrito",
     "ir a cupones",
   ];
@@ -113,6 +114,9 @@ export const Disco = () => {
     } else if (e.target.value === "link a una colección") {
       setDataLinkType("collection");
       setInputId(true);
+    } else if (e.target.value === "link a una landing") {
+      setDataLinkType("landing");
+      setInputId(true);
     } else if (e.target.value === "ir al carrito") {
       setDataLinkType("cart");
       setInputId(false);
@@ -139,7 +143,8 @@ export const Disco = () => {
     if (
       dataLinkType === "product" ||
       dataLinkType === "collection" ||
-      dataLinkType === "category"
+      dataLinkType === "category" ||
+      dataLinkType === "landing"
     ) {
       if (dataLinkId === "") {
         document.getElementById("dataLinkId").classList.add("is-invalid");
@@ -268,6 +273,16 @@ export const Disco = () => {
               setAlertaError(false);
               setSpinner(false);
             }
+
+            if (data.status === 401) {
+               //console.log("redirijo");
+               setMessage("Usuario no autorizado");
+               localStorage.removeItem("userGduPush");
+               localStorage.removeItem("tokenGduPush");
+               window.location.replace("");
+            }
+
+
           })
           .catch((error) => {
             console.error("Error =>", error);
@@ -395,7 +410,7 @@ export const Disco = () => {
             <>
               <div className="position-relative">
                 <label className="form-label text-muted">
-                  id de producto, colección o categorías
+                  id de producto, colección, categoría o landing
                 </label>
                 <Input
                   attribute={{
@@ -594,8 +609,7 @@ export const Disco = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      
+    
     </div>
   );
 };

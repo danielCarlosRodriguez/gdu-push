@@ -9,6 +9,7 @@ import { ExclamationOctagonFill } from "react-bootstrap-icons";
 import { Modal, Button } from "react-bootstrap";
 
 
+
 export const Devoto = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
   const [cuerpo, setCuerpo] = useState("¡Acá va el cuerpo del mensaje! 🚀");
@@ -48,6 +49,7 @@ export const Devoto = () => {
     "link a un producto",
     "link a una colección",
     "link a una categoría",
+    "link a una landing",
     "ir al carrito",
     "ir a cupones",
   ];
@@ -112,6 +114,9 @@ export const Devoto = () => {
     } else if (e.target.value === "link a una colección") {
       setDataLinkType("collection");
       setInputId(true);
+         } else if (e.target.value === "link a una landing") {
+      setDataLinkType("landing");
+      setInputId(true);
     } else if (e.target.value === "ir al carrito") {
       setDataLinkType("cart");
       setInputId(false);
@@ -138,7 +143,8 @@ export const Devoto = () => {
     if (
       dataLinkType === "product" ||
       dataLinkType === "collection" ||
-      dataLinkType === "category"
+      dataLinkType === "category" ||
+      dataLinkType === "landing"
     ) {
       if (dataLinkId === "") {
         document.getElementById("dataLinkId").classList.add("is-invalid");
@@ -267,6 +273,16 @@ export const Devoto = () => {
               setAlertaError(false);
               setSpinner(false);
             }
+            
+            if (data.status === 401) {
+              //console.log("redirijo");
+              setMessage("Usuario no autorizado");
+              localStorage.removeItem("userGduPush");
+              localStorage.removeItem("tokenGduPush");
+              window.location.replace("");
+            }
+
+
           })
           .catch((error) => {
             console.error("Error =>", error);
@@ -301,7 +317,7 @@ export const Devoto = () => {
 
             <button
               type="button"
-              class="btn btn-dark position-absolute tooltip-position collapse"
+              className="btn btn-dark position-absolute tooltip-position collapse"
               id="tooltip-titulo"
             >
               Falta Título{" "}
@@ -309,7 +325,7 @@ export const Devoto = () => {
                 width="1em"
                 height="1em"
                 viewBox="0 0 16 16"
-                class="position-absolute top-100 start-50 translate-middle mt-1"
+                className="position-absolute top-100 start-50 translate-middle mt-1"
                 fill="#212529"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -394,7 +410,7 @@ export const Devoto = () => {
             <>
               <div className="position-relative">
                 <label className="form-label text-muted">
-                  id de producto, colección o categorías
+                  id de producto, colección, categoría o landing
                 </label>
                 <Input
                   attribute={{
@@ -408,7 +424,7 @@ export const Devoto = () => {
 
                 <button
                   type="button"
-                  class="btn btn-dark position-absolute tooltip-position collapse "
+                  className="btn btn-dark position-absolute tooltip-position collapse "
                   id="tooltip-id"
                 >
                   Falta id{" "}
@@ -416,7 +432,7 @@ export const Devoto = () => {
                     width="1em"
                     height="1em"
                     viewBox="0 0 16 16"
-                    class="position-absolute top-100 start-50 translate-middle mt-1"
+                    className="position-absolute top-100 start-50 translate-middle mt-1"
                     fill="#212529"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -571,11 +587,11 @@ export const Devoto = () => {
         </div>
       </main>
 
-      <Footer />
+      <Footer/>
 
       {/* Modal  ////////////////////////////////////////////////*/}
       <Modal show={show}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton onClick={handleNo}>
           <Modal.Title>Atención</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -593,6 +609,7 @@ export const Devoto = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      
     </div>
   );
 };
