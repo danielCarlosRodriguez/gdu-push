@@ -72,12 +72,18 @@ export const Login = () => {
 
   return (
     <>
-      <div className="fondo">
+      <div className="">
         <div className="container vh-100">
           <div className="contenedor-formulario ">
-            <div className="fs-0 mx-auto text-center">GDU-Push</div>
             <div className="row ">
               <form className="shadow p-3 bg-light rounded mx-auto">
+                <h1 className="text-center text-gris">GDU-Push</h1>
+                <div className="text-center text-gris fs-6">
+                  Bienvenido al gestor de envíos
+                </div>
+                <div className="text-center text-gris fs-6 mb-3">
+                 Push App
+                </div>
                 <label className="form-label">Email address</label>
                 <input
                   type="user"
@@ -92,7 +98,7 @@ export const Login = () => {
                   id="password"
                   onChange={handlePass}
                 ></input>
-                <button className="btn btn-push mt-3" onClick={handleClick}>
+                <button className="btn btn-gris mt-3" onClick={handleClick}>
                   enviar
                 </button>
               </form>
@@ -111,8 +117,6 @@ export const Login = () => {
           </div>
         </div>
       </div>
-
-     
     </>
   );
 };
