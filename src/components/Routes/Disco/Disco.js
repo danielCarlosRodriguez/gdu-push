@@ -8,11 +8,9 @@ import { ExclamationTriangleFill } from "react-bootstrap-icons";
 import { ExclamationOctagonFill } from "react-bootstrap-icons";
 import { Modal, Button } from "react-bootstrap";
 
-
-
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
-  const [cuerpo, setCuerpo] = useState("Acá va el cuerpo del mensaje! 🚀");
+  const [cuerpo, setCuerpo] = useState("¡Acá va el cuerpo del mensaje! 🚀");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [fechaDeEnvio, setFechaDeEnvio] = useState("");
@@ -33,6 +31,7 @@ export const Disco = () => {
   const [inputId, setInputId] = useState(false);
   const [spinner, setSpinner] = useState(false);
   const [show, setShow] = useState(false);
+  const [datos, setDatos] = useState(false);
   const [message, setMessage] = useState(
     "Ha ocurrido un error, intente nuevamente en unos minutos"
   );
@@ -169,8 +168,10 @@ export const Disco = () => {
     //console.log("apreto Si");
     setContinuarEnvio(true);
     setShow(false);
+    setSpinner(true);
     document.getElementById("fechaDeFin").classList.remove("is-invalid");
     document.getElementById("horaDeFin").classList.remove("is-invalid");
+    envioDatos();
   }
 
   function handleNo() {
@@ -225,6 +226,8 @@ export const Disco = () => {
         data,
       };
 
+      setDatos(bodyDeDatos);
+
       // Última validación, Fecha de fin //////////////////////////////
       if (!continuarEnvio) {
         //console.log("continuarEnvio false: ", continuarEnvio);
@@ -234,6 +237,7 @@ export const Disco = () => {
         setShow(true);
       } else {
         setSpinner(true);
+        envioDatos();
 
         // Muestro mensaje en html //////////////////////////////
         //if (bodyDeDatos) {
@@ -241,57 +245,57 @@ export const Disco = () => {
         //let txt = document.getElementById("muestro-mensaje");
         //txt.innerHTML = JSON.stringify(bodyDeDatos);
         // }
-
-        const requestOptions = {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          //body: bodyDeDatos,
-          body: JSON.stringify(bodyDeDatos),
-        };
-
-        fetch(
-          "https://api-test.disco.com.uy/notifications/send",
-          requestOptions
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            setMessage(data.message);
-
-            if (data.code === "SUCCESS") {
-              setAlertaSuccess(true);
-              setAlertaWarning(false);
-              setAlertaError(false);
-              setSpinner(false);
-            } else {
-              setAlertaSuccess(false);
-              setAlertaWarning(true);
-              setAlertaError(false);
-              setSpinner(false);
-            }
-
-            if (data.status === 401) {
-               //console.log("redirijo");
-               setMessage("Usuario no autorizado");
-               localStorage.removeItem("userGduPush");
-               localStorage.removeItem("tokenGduPush");
-               window.location.replace("");
-            }
-
-
-          })
-          .catch((error) => {
-            console.error("Error =>", error);
-            setAlertaError(true);
-            setSpinner(false);
-          });
       }
     }
   }
+
+  const envioDatos = () => {
+    //console.log("datos >> ", datos);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      //body: bodyDeDatos,
+      body: JSON.stringify(datos),
+    };
+
+    fetch("https://api-test.disco.com.uy/notifications/send", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setMessage(data.message);
+
+        if (data.code === "SUCCESS") {
+          setAlertaSuccess(true);
+          setAlertaWarning(false);
+          setAlertaError(false);
+          setSpinner(false);
+        } else {
+          setAlertaSuccess(false);
+          setAlertaWarning(true);
+          setAlertaError(false);
+          setSpinner(false);
+        }
+
+        if (data.status === 401) {
+          //console.log("redirijo");
+          setMessage("Usuario no autorizado");
+          localStorage.removeItem("userGduPush");
+          localStorage.removeItem("tokenGduPush");
+          window.location.replace("");
+        }
+      })
+      .catch((error) => {
+        console.error("Error =>", error);
+        setAlertaError(true);
+        setSpinner(false);
+      });
+  };
+
   function handleCheckFechaDeEnvio(event) {
     setChecked(!checked);
   }
@@ -587,7 +591,7 @@ export const Disco = () => {
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
 
       {/* Modal  ////////////////////////////////////////////////*/}
       <Modal show={show}>
@@ -609,7 +613,6 @@ export const Disco = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    
     </div>
   );
 };
