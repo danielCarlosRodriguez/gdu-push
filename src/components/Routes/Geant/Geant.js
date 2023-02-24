@@ -309,7 +309,7 @@ export const Geant = () => {
                 name: "title",
                 type: "text",
                 placeholder: "",
-                maxLength: "22",
+                maxLength: "30",
                 className: `form-control mb-3`,
               }}
               handleChange={handleChange}
@@ -343,7 +343,7 @@ export const Geant = () => {
                 name: "body",
                 type: "text",
                 placeholder: "",
-                maxLength: "31",
+                maxLength: "80",
                 className: `form-control mb-3`,
               }}
               handleChange={handleChange}

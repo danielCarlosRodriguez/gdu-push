@@ -39,7 +39,7 @@ export const Navbar = () => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem>{user}</DropdownItem>
-            <DropdownItem onClick={handleClick}>Logout</DropdownItem>
+            <DropdownItem onClick={handleClick}>Salir</DropdownItem>
 
             <DropdownItem></DropdownItem>
           </DropdownMenu>

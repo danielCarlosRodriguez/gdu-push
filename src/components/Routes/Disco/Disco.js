@@ -12,7 +12,7 @@ import { Modal, Button } from "react-bootstrap";
 
 export const Disco = () => {
   const [titulo, setTítulo] = useState("Acá va el Título 😎");
-  const [cuerpo, setCuerpo] = useState("¡Acá va el cuerpo del mensaje! 🚀");
+  const [cuerpo, setCuerpo] = useState("Acá va el cuerpo del mensaje! 🚀");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [fechaDeEnvio, setFechaDeEnvio] = useState("");
@@ -309,7 +309,7 @@ export const Disco = () => {
                 name: "title",
                 type: "text",
                 placeholder: "",
-                maxLength: "22",
+                maxLength: "30",
                 className: `form-control mb-3`,
               }}
               handleChange={handleChange}
@@ -343,7 +343,7 @@ export const Disco = () => {
                 name: "body",
                 type: "text",
                 placeholder: "",
-                maxLength: "31",
+                maxLength: "80",
                 className: `form-control mb-3`,
               }}
               handleChange={handleChange}
