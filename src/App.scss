@@ -38,7 +38,7 @@ $light: #ffffff;
 $gray: #c4ccde;
 $colorpush: #7532fa;
 $colorgris: #484F57;
-$colorgrisoscuro: #474f52;
+$colorgrisclaro: #474f52;
 
 .navbar {
   background-color: white;
@@ -67,7 +67,10 @@ $colorgrisoscuro: #474f52;
 }
 
 .text-gris{
-  color: $colorgrisoscuro;
+  color: $colorgrisclaro;
+}
+.bg-gris{
+  background-color: $colorgris;
 }
 
 
@@ -113,7 +116,7 @@ $colorgrisoscuro: #474f52;
 //Botón Sidebar
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   background-color: white !important;
-  color: $colorgrisoscuro !important;
+  color: $colorgrisclaro !important;
 
 }
 
@@ -200,6 +203,10 @@ width: 100px;
 .fs-0 {
   font-size: 3rem !important;
   color: white;
+}
+
+.fs-7 {
+  font-size: 0.85rem !important;
 }
 
 .accordion-button.collapsed {
