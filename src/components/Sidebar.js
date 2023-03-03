@@ -21,7 +21,14 @@ export const Sidebar = () => {
   return (
     <div className="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
       <div className="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
-        <h3 className="nombre-gdu ms-md-3 me-md-0 me-2">GDU-Push</h3>
+        <NavLink
+          to="/"
+          activeclassname="active"
+          className="nav-link text-light"
+        >
+          <h3 className="nombre-gdu ms-md-3 me-md-0 me-2">GDU-Push</h3>
+        </NavLink>
+
         {/* <span class="fs-5 ms-3 d-none d-sm-inline">
           GDU<span class="">-Push</span>
         </span> */}
